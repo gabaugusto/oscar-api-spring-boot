@@ -97,130 +97,40 @@
         </div>
     </div>
     <script>
-        /**
-        * Identifica o formulário e adiciona o evento de envio.
-        *
-        */
-        const formulario = document.getElementById("formulario");
-        formulario.addEventListener("submit", handleFormSubmit);
 
-        /**
-        * Função manipuladora de eventos para um envio de formulário.
-        * @see https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/submit_event
-        * 
-        */
-        async function handleFormSubmit(event) {
-            try {
+        const btnSubmit = document.querySelector('input[type="submit"]');
 
-                /**
-                * preventDefault impede o comportamento padrão do envio do navegador ao formulário para que possamos lidar nós mesmos com os dados.
-                * 
-                */
-                event.preventDefault();
+        const url = "http://localhost:8082/indicados/inserir";
 
-            
+        const form = document.getElementById('formulario');
 
-                /**
-                * Aqui pegamos o endereço da URL da API do atributo `action` do formulário.
-                */
-                const url = formulario.action;
+        // enviando dados para a API usando FormData e Fetch
 
-                try {
+        form.addEventListener('submit', async function (event) {
+            event.preventDefault();
 
-                    /**
-                    * Aqui pegamos todos os campos do formulário e torna seus valores disponiveis através de uma instância da Classe `FormData`.
-                    * 
-                    * @see https://developer.mozilla.org/en-US/docs/Web/API/FormData
-                    */
+            const formData = new FormData(form);
 
-                    const dadosFormulario = new FormData(formulario);
-                    const responseData = await postFormDataAsJson({ url, dadosFormulario });
+            // FormData é uma interface que permite a construção de um conjunto de pares chave/valor representando  os campos e seus valores.  Ele fornece um modo fácil de construir um conjunto de pares chave/valor que podem ser enviados usando a função fetch().
 
-                    console.log("Abaixo o resultado do consumo da API");
-                    console.log({ responseData });
-
-                    /**
-                    *
-                    * Exibindo os dados que foram enviados para a API
-                    *    
-                    **/
-                    const print = document.getElementById("response");
-                    print.innerHTML = "";
-                    print.innerHTML += "<strong>Exibindo os dados que foram enviados para a API <br>";
-                    
-
-                    document.getElementById("txtFeedback").innerHTML = "Envio realizado com sucesso!";
-                    formulario.reset();
-                    return responseData;
-
-                } catch (error) {
-                    console.error(error);
-                }
-            }
-            catch (error) {
-                console.error(error);
-            }
-        }
-
-        /**
-        *
-        * Exibindo os dados dentro da div com o ID response
-        *    
-        **/
-        async function postFormDataAsJson({ url, formData }) {
-
-            /**
-            * 
-            * Não podemos passar a instância `FormData` diretamente para `fetch`
-            * pois isso fará com que ela seja formatada automaticamente a solicitação
-            * corpo como "multipart" (pode pesquisar sobre envio de arquivos com html para se aprofundar no termo) 
-            * e defina o cabeçalho de solicitação `Content-Type`
-            * para `multipart/form-data`. Queremos enviar o corpo da solicitação
-            * como JSON, então estamos convertendo em um objeto simples e então
-            * em uma string JSON.
-            **/
-
-            const formDataJsonString = JSON.stringify(Object.fromEntries(formData.entries()));
-            
-
-            const fetchOptions = {
-                /**
-                * O método padrão para uma solicitação com busca é GET,
-                * então devemos dizer a ele para usar o método POST HTTP.
-                * 
-                */
-                method: "POST",
-                /**
-                *
-                * Esses cabeçalhos serão adicionados à solicitação e informarão
-                * a API de que o corpo da solicitação é JSON e que podemos
-                * aceita respostas JSON.
-                */
-
+            const response = await fetch(url, {
+                method: 'POST',
                 headers: {
-                    'Accept': "application/json, text/plain, */*",
-                    'Content-Type': "application/json;charset=utf-8"
+                    'Content-Type': 'application/json'
                 },
+                body: JSON.stringify(Object.fromEntries(formData))
+            });
 
-                /**
-                *
-                * O corpo da nossa solicitação POST é a string JSON que
-                * que criamos acima.
-                */
-                body: formDataJsonString,
-            };
-
-            const response = await fetch(url, fetchOptions);
-
-            if (!response.ok) {
-                const errorMessage = await response.text();
-                throw new Error(errorMessage);
-                document.getElementById("txtFeedback").innerHTML = errorMessage;
-                formulario.reset();
+            if (response.ok) {
+                alert('Registro inserido com sucesso!');
+                console.log(response);
+            } else {
+                alert('Erro ao inserir registro!');
             }
+        });
 
-            return response.json();
-        }
+
+
     </script>
 </body>
 
