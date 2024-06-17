@@ -1,4 +1,4 @@
-package br.com.buildar.api.buildar.models;
+package br.com.oscar.api.models;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

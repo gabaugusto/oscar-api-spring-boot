@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>br.com.oscar.api</groupId>
-	<artifactId>buildar</artifactId>
+	<artifactId>oscar</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>oscar</name>
 	<description>Indicados ao Oscar</description>

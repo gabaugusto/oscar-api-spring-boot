@@ -1,0 +1,9 @@
+
+api/target/classes/br/com/buildar/api/buildar/controllers/IndicadosAoOscarController.class
+api/target/classes/br/com/buildar/api/buildar/models/IndicadosAoOscar.class
+api/target/classes/br/com/buildar/api/buildar/OscarApplication.class
+api/target/classes/br/com/buildar/api/buildar/repositories/IndicadosAoOscarRepository.class
+api/target/classes/br/com/oscar/api/controllers/IndicadosAoOscarController.class
+api/target/classes/br/com/oscar/api/models/IndicadosAoOscar.class
+api/target/classes/br/com/oscar/api/OscarApplication.class
+api/target/classes/br/com/oscar/api/repositories/IndicadosAoOscarRepository.class

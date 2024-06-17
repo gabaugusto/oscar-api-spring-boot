@@ -1,7 +1,7 @@
-package br.com.buildar.api.buildar.controllers;
+package br.com.oscar.api.controllers;
 
-import br.com.buildar.api.buildar.models.IndicadosAoOscar;
-import br.com.buildar.api.buildar.repositories.IndicadosAoOscarRepository;
+import br.com.oscar.api.models.IndicadosAoOscar;
+import br.com.oscar.api.repositories.IndicadosAoOscarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,12 +20,11 @@ public class IndicadosAoOscarController {
 
      /*
         CRUD          ->  Create, Read/Retrieve, Update and Delete
-        GetMapping    ->  Traz dados do banco
-        RequestMapping->  Traz dados do banco
-        PostMapping   ->  Envia/cria dados para o banco
+        PostMapping   ->  Enviar/criar dados para o banco
+        GetMapping    ->  Trazer dados do banco
+        RequestMapping->  Trazer dados do banco
+        PutMapping    ->  Atualizar dados do banco
         DeleteMapping ->  Apaga dados do banco
-        PutMapping    ->  Atualiza dados do banco
-
      */
     // AutoWired significa que o SPRING vai injetar a dependência
     // Injetar dependência significa que o SPRING vai criar uma instância do objeto
@@ -50,7 +49,7 @@ public class IndicadosAoOscarController {
     // Encontrar um único elemento por id
     @RequestMapping(value = "/buscar/id/{id}", method = RequestMethod.GET)
     public Optional<IndicadosAoOscar> searchById(@PathVariable int id) {
-        return dbConnection.findIndicadoByidRegistro(id);
+        return dbConnection.findById(id);
     }
 
     // Encontrar elementos por nome do indicado

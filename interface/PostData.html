@@ -118,16 +118,12 @@
                 */
                 event.preventDefault();
 
-                /**
-                * Aqui obtemos o elemento ao qual o manipulador de eventos foi anexado.
-                * @see https://developer.mozilla.org/en-US/docs/Web/API/Event/currentTarget
-                */
-                const form = event.currentTarget;
+            
 
                 /**
                 * Aqui pegamos o endereço da URL da API do atributo `action` do formulário.
                 */
-                const url = form.action;
+                const url = formulario.action;
 
                 try {
 
@@ -137,7 +133,7 @@
                     * @see https://developer.mozilla.org/en-US/docs/Web/API/FormData
                     */
 
-                    const dadosFormulario = new FormData(form);
+                    const dadosFormulario = new FormData(formulario);
                     const responseData = await postFormDataAsJson({ url, dadosFormulario });
 
                     console.log("Abaixo o resultado do consumo da API");
@@ -151,13 +147,10 @@
                     const print = document.getElementById("response");
                     print.innerHTML = "";
                     print.innerHTML += "<strong>Exibindo os dados que foram enviados para a API <br>";
-
-                    for (const [key, value] of formData.entries()) {
-                        print.innerHTML += `${key}: ${value}<br>`;
-                    }
+                    
 
                     document.getElementById("txtFeedback").innerHTML = "Envio realizado com sucesso!";
-                    form.reset();
+                    formulario.reset();
                     return responseData;
 
                 } catch (error) {
@@ -187,8 +180,8 @@
             * em uma string JSON.
             **/
 
-            const plainFormData = Object.fromEntries(formData.entries());
-            const formDataJsonString = JSON.stringify(plainFormData);
+            const formDataJsonString = JSON.stringify(Object.fromEntries(formData.entries()));
+            
 
             const fetchOptions = {
                 /**
@@ -223,7 +216,7 @@
                 const errorMessage = await response.text();
                 throw new Error(errorMessage);
                 document.getElementById("txtFeedback").innerHTML = errorMessage;
-                form.reset();
+                formulario.reset();
             }
 
             return response.json();

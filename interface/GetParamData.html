@@ -55,10 +55,10 @@
         const urlParams = new URLSearchParams(window.location.search);
 
         // recebendo o parametro id da URL (se existir)
-        var id = urlParams.get('id');
+        var id = urlParams.get('id'); // Ao não ser informado um id o valor padrão será null
 
         // recebendo o parametro nome da URL (se existir)
-        var nome = urlParams.get('nome');
+        var nome = urlParams.get('nome'); // Ao não ser informado um nome o valor padrão será null
 
         // se o id for diferente de null, a URL será alterada para buscar um único registro
         if (id != null) {

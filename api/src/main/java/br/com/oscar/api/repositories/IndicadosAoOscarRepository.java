@@ -1,6 +1,6 @@
-package br.com.buildar.api.buildar.repositories;
+package br.com.oscar.api.repositories;
 
-import br.com.buildar.api.buildar.models.IndicadosAoOscar;
+import br.com.oscar.api.models.IndicadosAoOscar;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -17,10 +17,15 @@ import java.util.UUID;
     */
 
 @Repository
-public interface IndicadosAoOscarRepository extends JpaRepository<IndicadosAoOscar, UUID> {
+public interface IndicadosAoOscarRepository extends JpaRepository<IndicadosAoOscar, Integer> {
 
     List<IndicadosAoOscar> findBynomeIndicadoContaining(String name);
 
     Optional<IndicadosAoOscar> findIndicadoByidRegistro(int id);
+
+    // Lista Opcionional
+    Optional<List<IndicadosAoOscar>> findIndicadoBynomeIndicado(String name);
+
+    List<IndicadosAoOscar> findIndicadoByanoFilmagem(int id);
 
 }

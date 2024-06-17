@@ -1,4 +1,4 @@
-package br.com.buildar.api.buildar;
+package br.com.oscar.api;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
