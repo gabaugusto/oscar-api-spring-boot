@@ -18,7 +18,7 @@
                 <svg class="bi me-2" width="40" height="32">
                     <use xlink:href="#bootstrap"></use>
                 </svg>
-                <span class="fs-4">Indicados ao Oscar</span>
+                <span class="fs-4">Familia</span>
             </a>
 
             <ul class="nav nav-pills">
@@ -33,56 +33,31 @@
     </div>
     <div class="container">
         <div class="col-md-12 col-lg-12">
-            <h4 class="mb-3">Cadastrar Indicados ao Oscar</h4>
+            <h4 class="mb-3">Cadastrar Familias</h4>
 
-            <p>Cadastre abaixo novos filmes indicados ao Oscar para alimentar o banco através da API.</p>
+            <p>Cadastre abaixo novas Familias para alimentar o banco através da API.</p>
 
             <form action="http://localhost:8082/indicados/inserir" id="formulario" class="needs-validation">
 
-                <div class="col-sm-12">
-                    <label for="nomeIndicado" class="form-label">Nome da pessoa indicada:</label>
-                    <input type="text" name="nomeIndicado" id="nomeIndicado" class="form-control" required>
-                </div>
-
-                <div class="col-sm-12">
-                    <label for="nomeFilme" class="form-label">Filme:</label>
-                    <input type="text" name="nomeFilme" id="nomeFilme" class="form-control" required>
-                </div>
-
                 <div class="row">
                     <div class="col-sm-6">
-                        <label for="anoFilmagem" class="form-label">Ano Filmagem:</label>
-                        <input type="number" name="anoFilmagem" id="anoFilmagem" class="form-control">
+                        <label for="nomeFamilia" class="form-label">Nome Familia:</label>
+                        <input type="text" name="nomeFamilia" id="nomeFamilia" class="form-control">
                     </div>
 
                     <div class="col-sm-6">
-                        <label for="anoCerimonia" class="form-label">Ano da cerimônia:</label>
-                        <input type="number" name="anoCerimonia" id="anoCerimonia" class="form-control">
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-sm-6">
-                        <label for="categoria" class="form-label">Categoria:</label>
-                        <input type="text" name="categoria" id="categoria" class="form-control" required>
-                    </div>
-
-                    <div class="col-sm-3">
-                        <label for="edicaoCerimonia" class="form-label">Cerimônia:</label>
-                        <input type="number" name="edicaoCerimonia" id="edicaoCerimonia" class="form-control">
-                    </div>
-
-                    <div class="col-sm-3">
-                        <label for="vencedor">Venceu?</label>
-                        <select name="vencedor" id="vencedor" class="form-control">
-                            <option value="1">Sim</option>
-                            <option value="0">Não</option>
+                        <label for="status" class="form-label">Status:</label>
+                       
+                        <select name="status" id="status" class="form-select">
+                            <option value="1">Ativo</option>
+                            <option value="0">Inativo</option>
                         </select>
                     </div>
                 </div>
+
                 <div class="row">
                     <input type="submit" class="my-4 w-100 btn btn-primary btn-lg"
-                        value="Registrar indicada(o) ao Oscar">
+                        value="Registrar Familia">
                 </div>
                 <div class="row">
                     <div id="response" class="response">
@@ -100,7 +75,7 @@
 
         const btnSubmit = document.querySelector('input[type="submit"]');
 
-        const url = "http://localhost:8082/indicados/inserir";
+        const url = "http://localhost:8080/familias/salvar";
 
         const form = document.getElementById('formulario');
 

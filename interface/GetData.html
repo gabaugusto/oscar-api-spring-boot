@@ -18,7 +18,7 @@
                 <svg class="bi me-2" width="40" height="32">
                     <use xlink:href="#bootstrap"></use>
                 </svg>
-                <span class="fs-4">Indicados ao Oscar</span>
+                <span class="fs-4">Familias </span>
             </a>
 
             <ul class="nav nav-pills">
@@ -34,8 +34,8 @@
 
     <div class="container">
         <div class="col-md-12 col-lg-12">
-            <h4 class="mb-3">Listar todos os Indicados ao Oscar</h4>
-            <p class="mb-3">Consumindo a API de Indicados ao Oscar utilizando FETCH</p>
+            <h4 class="mb-3">Listar todos os registros financeiros</h4>
+            <p class="mb-3">Consumindo a API de Finanças utilizando FETCH</p>
 
             <div class="table-responsive">
                 <table id="tabelaResposta" class="table-striped table">
@@ -46,13 +46,18 @@
     </div>
 
     <script>
-        // O código abaixo consome a API de indicados ao Oscar para encontrar um único registro.
+        // 1 Coleta de Dados
+        // 2 Processamento de Dados
+        // 3 Exibição de Dados
+
+
+        // O código abaixo consome a API de indicados ao Oscar para encontrar todos os registros.
 
         // Tabela onde será exibido o resultado
         const tabelaResposta = document.getElementById("tabelaResposta");
 
         // URL da API
-        const url = "http://localhost:8082/indicados/";
+        const url = "http://localhost:8080/familias/";
 
         // Esse modelo utiliza o comando fetch e trabalha com promessas. 
         fetch(url)
@@ -66,13 +71,13 @@
                 // Exemplo dos dados exibidos em tela
                 // innerHTML é uma propriedade que define o conteúdo HTML de um elemento
                 tabelaResposta.innerHTML += `<thead>
-                                                <tr><th>Nome</th><th>Categoria</th></tr>
+                                                <tr><th>Nome da Familia</th><th>Status</th></tr>
                                              </thead>
                                             <tbody>
-                                            <tr><td> ${resposta[0].nomeIndicado} </td><td> ${resposta[0].categoria}</td></tr>
-                                            <tr><td> ${resposta[1].nomeIndicado} </td><td> ${resposta[1].categoria}</td></tr>
-                                            <tr><td> ${resposta[2].nomeIndicado} </td><td> ${resposta[2].categoria}</td></tr>
-                                            <tr><td> ${resposta[3].nomeIndicado} </td><td> ${resposta[3].categoria}</td></tr>`;
+                                                <tr><td>${resposta[2].nomeFamilia}</td><td>${resposta[2].status}</td></tr>
+                                                <tr><td>${resposta[3].nomeFamilia}</td><td>${resposta[3].status}</td></tr>
+                                                </tbody>
+                                            `;
 
                 // for (let i = 0; i < 50; i++) {
                 //    tabelaResposta.innerHTML += "<tr><td>" + resposta[i].nomeIndicado</td><td>" + resposta[i].categoria</td></tr>";

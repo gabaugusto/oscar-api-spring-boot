@@ -48,50 +48,24 @@
             <h4 class="mb-3">Atualizar</h4>
             <form id="segundo" class="needs-validation">
 
-                <div class="col-sm-12">
-                    <label for="nomeIndicado" class="form-label">Nome da pessoa indicada:</label>
-                    <input type="text" name="nomeIndicado" id="nomeIndicado" class="form-control" required>
-                </div>
-
-                <div class="col-sm-12">
-                    <label for="nomeFilme" class="form-label">Filme:</label>
-                    <input type="text" name="nomeFilme" id="nomeFilme" class="form-control" required>
-                </div>
-
                 <div class="row">
-                    <div class="col-sm-6">
-                        <label for="anoFilmagem" class="form-label">Ano Filmagem:</label>
-                        <input type="number" name="anoFilmagem" id="anoFilmagem" class="form-control">
-                    </div>
 
-                    <div class="col-sm-6">
-                        <label for="anoCerimonia" class="form-label">Ano da cerimônia:</label>
-                        <input type="number" name="anoCerimonia" id="anoCerimonia" class="form-control">
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-sm-6">
-                        <label for="categoria" class="form-label">Categoria:</label>
-                        <input type="text" name="categoria" id="categoria" class="form-control" required>
+                    <div class="col-sm-3">
+                        <label for="nomeFamilia" class="form-label">Nome da Familia:</label>
+                        <input type="text" name="nomeFamilia" id="nomeFamilia" class="form-control">
                     </div>
 
                     <div class="col-sm-3">
-                        <label for="edicaoCerimonia" class="form-label">Cerimônia:</label>
-                        <input type="number" name="edicaoCerimonia" id="edicaoCerimonia" class="form-control">
-                    </div>
-
-                    <div class="col-sm-3">
-                        <label for="vencedor" class="form-label">Venceu?</label>
-                        <select name="vencedor" id="vencedor" class="form-control">
-                            <option value="1">Sim</option>
-                            <option value="0">Não</option>
+                        <label for="status" class="form-label">Status</label>
+                        <select name="status" id="status" class="form-control">
+                            <option value="1">Ativo</option>
+                            <option value="0">Inativo</option>
                         </select>
                     </div>
                 </div>
                 <div class="row">
                     <input type="submit" class="my-4 w-100 btn btn-primary btn-lg"
-                        value="Atualizar indicada(o) ao Oscar">
+                        value="Atualizar Familia">
                 </div>
                 <div class="row">
                     <div id="response" class="response">
@@ -118,14 +92,14 @@
         segundo.addEventListener("submit", atualizarRegistro);
 
         function buscarPorId(event) {
-            // impedir o comportamento padrão do formulário
+            // impedir o comportamento padrão do formulário, ou seja, impedir que ele seja recarrregado. 
             event.preventDefault();
 
             // coleto o id do primeiro formulario
             var id = document.getElementById("id").value;
 
             // URL da API
-            var url = `http://localhost:8082/indicados/buscar/id/${id}`;
+            var url = `http://localhost:8080/familias/buscar/id/${id}`;
 
             fetch(url)
                 .then(response => {
@@ -134,13 +108,8 @@
                 .then(resposta => {
                     console.log("Abaixo o resultado do consumo da API")
                     console.log(resposta);
-                    document.getElementById("nomeIndicado").value = resposta.nomeIndicado;
-                    document.getElementById("nomeFilme").value = resposta.nomeFilme;
-                    document.getElementById("anoFilmagem").value = resposta.anoFilmagem;
-                    document.getElementById("anoCerimonia").value = resposta.anoCerimonia;
-                    document.getElementById("categoria").value = resposta.categoria;
-                    document.getElementById("edicaoCerimonia").value = resposta.edicaoCerimonia;
-                    document.getElementById("vencedor").value = resposta.vencedor;
+                    document.getElementById("nomeFamilia").value = resposta.nomeFamilia.toString();
+                    document.getElementById("status").value = resposta.status;
                 })
         }
 
@@ -153,16 +122,11 @@
             var id = document.getElementById("id").value;
 
             var formData = new FormData(document.getElementById("segundo"));
-            var nomeIndicado = formData.get("nomeIndicado");
-            var nomeFilme = formData.get("nomeFilme");
-            var anoFilmagem = formData.get("anoFilmagem");
-            var anoCerimonia = formData.get("anoCerimonia");
-            var categoria = formData.get("categoria");
-            var edicaoCerimonia = formData.get("edicaoCerimonia");
-            var vencedor = formData.get("vencedor");
+            var nomeFamilia = formData.get("nomeFamilia");
+            var status = formData.get("status");
 
             // URL da API
-            var url = `http://localhost:8082/indicados/atualizar/${id}`;
+            var url = `http://localhost:8080/familias/atualizar/id/${id}`;
 
             fetch(url, {
                 method: 'PUT',
@@ -170,20 +134,14 @@
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    nomeIndicado: nomeIndicado,
-                    nomeFilme: nomeFilme,
-                    anoFilmagem: anoFilmagem,
-                    anoCerimonia: anoCerimonia,
-                    categoria: categoria,
-                    edicaoCerimonia: edicaoCerimonia,
-                    vencedor: vencedor
+                    nomeFamilia: nomeFamilia,
+                    status: status
                 })
             })
                 .then(response => {
                    response.json();
                 })
                 .then(resposta => {
-                    console.log("Abaixo o resultado do consumo da API")
                     console.log(resposta);
                     document.getElementById("response").innerHTML = "Registro atualizado com sucesso!";
                 })
