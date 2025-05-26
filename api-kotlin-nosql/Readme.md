@@ -45,9 +45,32 @@ Vamos construir uma API que:
 └── 📄 build.gradle.kts (Lista as dependências)
 ```
 
+### Criando a estrutura de pastas.
+
+Procure o caminho ***src/main/kotlin/com/example/projeto*** Dentro da pasta “**projeto**” (os nomes das pastas podem variar de acordo com os nomes foram informados na criação do projeto dentro do portal [start.spring.io](https://start.spring.io/)).
+
+Dentro dessa pasta você deve ter um arquivo chamado OscarApplication.java. Essa classe contém o método principal da sua classe. Não é necessário alterá-lo.
+
+1. Agora é o momento de criar três pastas para nossa arquitetura: models, controllers e repositories.
+
+*Dentro da estrutura de uma API, as classes são geralmente chamadas de "models", "controllers" e "repositories" devido à arquitetura do padrão MVC (Model-View-Controller) e ao uso do Spring Framework.*
+
+A estrutura abaixo segue o princípio da separação de responsabilidades, onde cada classe tem um papel específico. Os models representam as entidades e os dados da aplicação, os controllers lidam com as requisições e respostas HTTP, e os repositories tratam da persistência dos dados. Essa abordagem ajuda a manter o código organizado, modular e facilita a manutenção e a evolução da API ao longo do tempo.
+
+1. **Models**:
+   As classes chamadas de "models" representam as entidades de negócio do seu sistema. Essas classes modelam os dados e geralmente correspondem às tabelas em um banco de dados relacional. Os modelos encapsulam os atributos e comportamentos relacionados a uma entidade específica, como um usuário, produto, pedido etc. Eles são responsáveis por representar os dados e fornecer métodos para acessá-los e manipulá-los.
+
+2. **Controllers**:
+   As classes chamadas de "controllers" são responsáveis por receber as solicitações HTTP dos clientes e processá-las. Os controllers lidam com a lógica da aplicação, roteando as solicitações para os métodos apropriados e retornando as respostas apropriadas. Eles atuam como intermediários entre as requisições do cliente e as operações a serem realizadas nos modelos e nos serviços. Os controllers geralmente contêm métodos que são anotados com @RequestMapping ou outras anotações do Spring para mapear os endpoints da API e definir o comportamento esperado.
+
+3. **Repositories**:
+   As classes chamadas de "repositories" são responsáveis pela persistência dos dados. Elas são usadas para interagir com o banco de dados ou qualquer outro mecanismo de armazenamento de dados. Os repositories fornecem métodos para criar, recuperar, atualizar e excluir dados no banco de dados. Eles encapsulam a lógica de acesso aos dados e oferecem uma camada de abstração para as operações de leitura e gravação. Os repositories são tipicamente implementados usando frameworks ORM (Object-Relational Mapping), como o Spring Data JPA, que simplificam a interação com o banco de dados.
+
+A estrutura do seu projeto deve ser similar a essa:
+
 **Diagrama de Funcionamento**
 
-```markdown
+```mermaid
 flowchart LR
     Cliente -->|GET /api/indicacoes| Controller
     Controller -->|repository.findAll()| Repository
