@@ -19,18 +19,15 @@ Este projeto é um APP que consome uma API RESTful desenvolvida com Java SpringB
 │   │   ├── 📂 java/com/seupacote/oscarapp/  (substitua pelo seu pacote)
 │   │   │   ├── 📂 data/                     (Tudo relacionado a dados)
 │   │   │   │   ├── 📂 api/                  (Chamadas HTTP)
-│   │   │   │   │   ├── 📄 ApiService.kt     (Interface Retrofit)
-│   │   │   │   │   └── 📄 RetrofitInstance.kt
+│   │   │   │   │   ├── 📄 ApiService.kt     (Chamada da API)
 │   │   │   │   ├── 📂 repository/           (Opcional: Repositórios se tiver lógica complexa)
+│   │   │   │   │   └── 📄 RetrofitInstance.kt (Interface Retrofit)
 │   │   │   │   └── 📄 models/               (Modelos de dados)
 │   │   │   │       └── 📄 IndicacaoOscar.kt
 │   │   │   │
-│   │   │   ├── 📂 di/                       (Injeção de dependências - Opcional)
-│   │   │   │   └── 📄 AppModule.kt
-│   │   │   │
 │   │   │   ├── 📂 ui/                       (Todas as telas e componentes visuais)
 │   │   │   │   ├── 📂 components/           (Componentes reutilizáveis)
-│   │   │   │   │   └── 📄 IndicacaoCard.kt
+│   │   │   │   │   └── 📄 IndicacaoItem.kt
 │   │   │   │   │
 │   │   │   │   ├── 📂 screens/              (Telas principais)
 │   │   │   │   │   ├── 📄 ListaIndicacoesScreen.kt
