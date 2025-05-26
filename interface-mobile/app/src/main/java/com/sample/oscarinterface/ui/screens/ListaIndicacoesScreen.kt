@@ -26,8 +26,6 @@ fun ListaIndicacoesScreen(viewModel: OscarViewModel = viewModel()) {
     val isLoading by viewModel.isLoading.collectAsState(initial = false)
     val error by viewModel.error.collectAsState(initial = null)
 
-    Text(text = "Lista de Indicações")
-
     LaunchedEffect(Unit) {
         viewModel.fetchIndicacoes()
     }

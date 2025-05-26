@@ -1,7 +1,7 @@
 package com.sample.oscarinterface.data.models
 
 data class IndicacaoOscar(
-    val id: String? = null,
+    val id: Id,
     val idRegistro: String,
     val anoFilmagem: Int,
     val anoCerimonia: Int,
@@ -10,4 +10,9 @@ data class IndicacaoOscar(
     val nomeDoIndicado: String,
     val nomeDoFilme: String,
     val vencedor: Boolean
+)
+
+data class Id(
+    val timestamp: Long,
+    val date: String
 )

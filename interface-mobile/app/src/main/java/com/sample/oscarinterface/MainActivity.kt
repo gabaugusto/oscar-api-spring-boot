@@ -49,7 +49,7 @@ class MainActivity : ComponentActivity() {
                                 titleContentColor = MaterialTheme.colorScheme.primary,
                             ),
                             title = {
-                                Text("Top app bar")
+                                Text("Indicados ao Oscar")
                             }
                         )
                     },
