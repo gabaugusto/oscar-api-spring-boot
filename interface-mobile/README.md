@@ -22,7 +22,7 @@ Este projeto é um APP que consome uma API RESTful desenvolvida com Java SpringB
 │   │   │   │   │   ├── 📄 ApiService.kt     (Chamada da API)
 │   │   │   │   ├── 📂 repository/           (Opcional: Repositórios se tiver lógica complexa)
 │   │   │   │   │   └── 📄 RetrofitInstance.kt (Interface Retrofit)
-│   │   │   │   └── 📄 models/               (Modelos de dados)
+│   │   │   │   └── 📂 models/               (Modelos de dados)
 │   │   │   │       └── 📄 IndicacaoOscar.kt
 │   │   │   │
 │   │   │   ├── 📂 ui/                       (Todas as telas e componentes visuais)
@@ -54,6 +54,43 @@ Este projeto é um APP que consome uma API RESTful desenvolvida com Java SpringB
 └── 📄 build.gradle.kts
 ```
 
+## Como funciona a chamada da API
+A chamada da API é feita através do Retrofit, uma biblioteca que facilita a comunicação com serviços RESTful. O `RetrofitInstance.kt` configura o Retrofit e define a URL base da API. O `ApiService.kt` contém as definições das chamadas HTTP, como GET, POST, PUT e DELETE.
+
+###  Fluxo de Dados
+
+```plaintext
+[APP] -> "Quero ver as indicações do Oscar!" 
+    👇 
+[VIEWMODEL] -> Invoca o método no ApiService 
+    👇 
+[API SERVICE] -> Chamada Retrofit: GET /api/indicacoes 
+    👇 
+[RETROFIT] -> Envia a requisição HTTP para a API 
+    👇 
+[API SPRING] -> Processa a requisição e acessa o banco de dados 
+    👇 
+[MONGODB] -> Retorna os dados solicitados 
+   
+🔄 (O caminho volta com os dados!)
+```
+Ou de uma forma mais leve:
+
+```plaintext
+[📱 APP] -> "Quero ver as indicações do Oscar!" 
+   👇 
+[🎬 VIEWMODEL] -> "Vamos buscar isso!" 
+   👇 
+[📞 API SERVICE] -> Dial: GET /api/indicacoes 
+   👇 
+[🚀 RETROFIT] -> 🌐 Internet Magic! 
+   👇 
+[🌩️ API SPRING] -> "Banco, me dê os dados!" 
+   👇 
+[🗄️ MONGODB] -> "Aqui estão!" 
+   🔄 (O caminho volta com os dados!)
+```
+
 ## Como Executar o Projeto
 1. Com uma cópia do projeto, abra o projeto no Android Studio. 
 2. Certifique-se de que o JDK e o Kotlin estão configurados corretamente.
@@ -63,6 +100,11 @@ Este projeto é um APP que consome uma API RESTful desenvolvida com Java SpringB
    ```
 4. Inicie o servidor da API Java SpringBoot (se não estiver rodando) e certifique-se de que está acessível na URL configurada no `RetrofitInstance.kt`.
 5. Execute o aplicativo no emulador ou dispositivo Android.
+
+## Próximos Passos
+- Implementar a tela de detalhes da indicação do Oscar.
+- Adicionar funcionalidades de criação, atualização e exclusão de indicações.
+- Melhorar a interface do usuário com mais componentes visuais.
 
 ## Recursos
 - [Documentação Java SpringBoot](https://spring.io/projects/spring-boot)
