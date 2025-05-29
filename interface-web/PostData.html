@@ -33,7 +33,7 @@
     </div>
     <div class="container">
         <div class="col-md-12 col-lg-12">
-            <h4 class="mb-3">Cadastrar Familias</h4>
+            <h4 class="mb-3">Cadastrar Indicados ao Oscar</h4>
 
             <p>Cadastre abaixo novas Familias para alimentar o banco através da API.</p>
 
@@ -75,7 +75,7 @@
 
         const btnSubmit = document.querySelector('input[type="submit"]');
 
-        const url = "http://localhost:8080/familias/salvar";
+        const url = "http://localhost:8080/indicados/inserir";
 
         const form = document.getElementById('formulario');
 
@@ -86,7 +86,8 @@
 
             const formData = new FormData(form);
 
-            // FormData é uma interface que permite a construção de um conjunto de pares chave/valor representando  os campos e seus valores.  Ele fornece um modo fácil de construir um conjunto de pares chave/valor que podem ser enviados usando a função fetch().
+            // FormData é uma interface que permite a construção de um conjunto de pares chave/valor representando  os campos e seus valores.
+            // Ele fornece um modo fácil de construir um conjunto de pares chave/valor que podem ser enviados usando a função fetch().
 
             const response = await fetch(url, {
                 method: 'POST',

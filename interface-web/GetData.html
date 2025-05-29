@@ -18,7 +18,7 @@
                 <svg class="bi me-2" width="40" height="32">
                     <use xlink:href="#bootstrap"></use>
                 </svg>
-                <span class="fs-4">Familias </span>
+                <span class="fs-4">Indicados ao Oscar </span>
             </a>
 
             <ul class="nav nav-pills">
@@ -34,7 +34,7 @@
 
     <div class="container">
         <div class="col-md-12 col-lg-12">
-            <h4 class="mb-3">Listar todos os registros financeiros</h4>
+            <h4 class="mb-3">Listar todos os registros</h4>
             <p class="mb-3">Consumindo a API de Finanças utilizando FETCH</p>
 
             <div class="table-responsive">
@@ -50,14 +50,13 @@
         // 2 Processamento de Dados
         // 3 Exibição de Dados
 
-
         // O código abaixo consome a API de indicados ao Oscar para encontrar todos os registros.
 
         // Tabela onde será exibido o resultado
         const tabelaResposta = document.getElementById("tabelaResposta");
 
         // URL da API
-        const url = "http://localhost:8080/familias/";
+        const url = "http://localhost:8080/indicados/";
 
         // Esse modelo utiliza o comando fetch e trabalha com promessas. 
         fetch(url)
@@ -71,49 +70,48 @@
                 // Exemplo dos dados exibidos em tela
                 // innerHTML é uma propriedade que define o conteúdo HTML de um elemento
                 tabelaResposta.innerHTML += `<thead>
-                                                <tr><th>Nome da Familia</th><th>Status</th></tr>
+                                                <tr>
+                                                    <th>Nome do Filme</th>
+                                                    <th>Nome do Indicado</th>
+                                                </tr>
                                              </thead>
-                                            <tbody>
-                                                <tr><td>${resposta[2].nomeFamilia}</td><td>${resposta[2].status}</td></tr>
-                                                <tr><td>${resposta[3].nomeFamilia}</td><td>${resposta[3].status}</td></tr>
-                                                </tbody>
-                                            `;
+                                             <tbody>
+                                             `;
 
-                // for (let i = 0; i < 50; i++) {
-                //    tabelaResposta.innerHTML += "<tr><td>" + resposta[i].nomeIndicado</td><td>" + resposta[i].categoria</td></tr>";
-                // }
+                for (let i = 500; i < 600; i++) {
+                    tabelaResposta.innerHTML += "<tr><td>" + resposta[i].nomeFilme + "</td><td>" + resposta[i].nomeIndicado + "</td></tr>";
+                }
                 tabelaResposta.innerHTML += "</tbody>";
 
                 /*
-                Você não dever construir uma tabela com operações innerHTML. É apenas uma operação de string, e o navegador NÃO terá nenhuma ideia de que você está adicionando várias linhas em sequência. Então, ele tentará "limpar" seu html "quebrado" adicionando tags de fechamento automaticamente. Isso pode resultar em um comportamento inesperado. Em vez disso, você deve criar elementos DOM e anexá-los ao DOM.
-
-                Um exemplo de como fazer isso é:
-
-                const table = document.createElement('table');
-                const thead = document.createElement('thead');
-                const tbody = document.createElement('tbody');
-                const tr = document.createElement('tr');
-                
-                for (let i = 0; i < 50; i++) {
-                                                
-                    const td1 = document.createElement('td');
-                    td1.textContent = resposta[i].nomeIndicado;
-                    const td2 = document.createElement('td');
-                    td2.textContent = resposta[i].categoria;
-                    
+                    // Você não dever construir uma tabela com operações innerHTML. É apenas uma operação de string, e o navegador NÃO terá nenhuma ideia de que você está adicionando várias linhas em sequência. Então, ele tentará "limpar" seu html "quebrado" adicionando tags de fechamento automaticamente. Isso pode resultar em um comportamento inesperado. Em vez disso, você deve criar elementos DOM e anexá-los ao DOM.
+    
+                    // Um exemplo de como fazer isso é:
+    
+                    const table = document.createElement('table');
+    
+                    const thead = document.createElement('thead');
+                    const tbody = document.createElement('tbody');
                     const tr = document.createElement('tr');
-                    tr.appendChild(td1);
-                    tr.appendChild(td2);
                     
-                    tbody.appendChild(tr);
-                }
-
-                table.appendChild(thead);
-                table.appendChild(tbody);
-                tabelaResposta.appendChild(table);
-                
+                    for (let i = 0; i < 50; i++) {
+                                                    
+                        const td1 = document.createElement('td');
+                        td1.textContent = resposta[i].nomeIndicado;
+                        const td2 = document.createElement('td');
+                        td2.textContent = resposta[i].nomeFilme;
+                        
+                        const tr = document.createElement('tr');
+                        tr.appendChild(td1);
+                        tr.appendChild(td2);
+                        
+                        tbody.appendChild(tr);
+                    }
+    
+                    table.appendChild(thead);
+                    table.appendChild(tbody);
+                    tabelaResposta.appendChild(table);
                 */
-
             })
     </script>
 </body>

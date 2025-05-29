@@ -51,21 +51,19 @@
                 <div class="row">
 
                     <div class="col-sm-3">
-                        <label for="nomeFamilia" class="form-label">Nome da Familia:</label>
-                        <input type="text" name="nomeFamilia" id="nomeFamilia" class="form-control">
+                        <label for="nomeFilme" class="form-label">Nome do Filme:</label>
+                        <input type="text" name="nomeFilme" id="nomeFilme" class="form-control">
                     </div>
 
                     <div class="col-sm-3">
-                        <label for="status" class="form-label">Status</label>
-                        <select name="status" id="status" class="form-control">
-                            <option value="1">Ativo</option>
-                            <option value="0">Inativo</option>
-                        </select>
+                        <label for="nomeIndicado" class="form-label">Nome do Indicado:</label>
+                        <input type="text" name="nomeIndicado" id="nomeIndicado" class="form-control">
                     </div>
+
                 </div>
                 <div class="row">
                     <input type="submit" class="my-4 w-100 btn btn-primary btn-lg"
-                        value="Atualizar Familia">
+                        value="Atualizar">
                 </div>
                 <div class="row">
                     <div id="response" class="response">
@@ -99,7 +97,7 @@
             var id = document.getElementById("id").value;
 
             // URL da API
-            var url = `http://localhost:8080/familias/buscar/id/${id}`;
+            var url = `http://localhost:8080/indicados/buscar/id/${id}`;
 
             fetch(url)
                 .then(response => {
@@ -108,8 +106,8 @@
                 .then(resposta => {
                     console.log("Abaixo o resultado do consumo da API")
                     console.log(resposta);
-                    document.getElementById("nomeFamilia").value = resposta.nomeFamilia.toString();
-                    document.getElementById("status").value = resposta.status;
+                    document.getElementById("nomeFilme").value = resposta.nomeFilme.toString();
+                    document.getElementById("nomeIndicado").value = resposta.nomeIndicado.toString();
                 })
         }
 
@@ -122,11 +120,11 @@
             var id = document.getElementById("id").value;
 
             var formData = new FormData(document.getElementById("segundo"));
-            var nomeFamilia = formData.get("nomeFamilia");
-            var status = formData.get("status");
+            var nomeFilme = formData.get("nomeFilme");
+            var nomeIndicado = formData.get("nomeIndicado");
 
             // URL da API
-            var url = `http://localhost:8080/familias/atualizar/id/${id}`;
+            var url = `http://localhost:8080/indicados/atualizar/id/${id}`;
 
             fetch(url, {
                 method: 'PUT',
@@ -134,8 +132,8 @@
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    nomeFamilia: nomeFamilia,
-                    status: status
+                    nomeIndicado: nomeIndicado,
+                    nomeFilme: nomeFilme
                 })
             })
                 .then(response => {

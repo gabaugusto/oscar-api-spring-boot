@@ -49,7 +49,7 @@
         const tabelaResposta = document.getElementById("tabelaResposta");
 
         // URL da API
-        var url = "http://localhost:8082/indicados/";
+        var url = "http://localhost:8080/indicados/";
 
         // Buscando parametros da URL
         const urlParams = new URLSearchParams(window.location.search);
@@ -60,14 +60,14 @@
         // recebendo o parametro nome da URL (se existir)
         var nome = urlParams.get('nome'); // Ao não ser informado um nome o valor padrão será null
 
-        // se o id for diferente de null, a URL será alterada para buscar um único registro
+        // Se o id for diferente de null, a URL será alterada para buscar um único registro
         if (id != null) {
-            url = `http://localhost:8082/indicados/buscar/id/${id}`;
+            url = `http://localhost:8080/indicados/buscar/id/${id}`;
         }
 
         // se o nome for diferente de null, a URL será alterada para buscar um único registro
         if (nome != null) {
-            url = `http://localhost:8082/indicados/buscar/nome/${nome}`;
+            url = `http://localhost:8080/indicados/buscar/nome/${nome}`;
         }
 
         // Nesse exemplo a URL trabalha com id ou o nome, mas poderia ser feito para qualquer campo da tabela.

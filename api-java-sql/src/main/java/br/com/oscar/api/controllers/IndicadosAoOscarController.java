@@ -58,7 +58,7 @@ public class IndicadosAoOscarController {
         return dbConnection.findBynomeIndicadoContaining(name);
     }
 
-    @DeleteMapping(value = "/deletar/{id}", produces = "application/json") // Deletar um registro
+    @DeleteMapping(value = "/deletar/id/{id}", produces = "application/json") // Deletar um registro
     public String delete(@PathVariable int id) {
         IndicadosAoOscar indicado = dbConnection.findIndicadoByidRegistro(id).get();
         dbConnection.delete(indicado);
