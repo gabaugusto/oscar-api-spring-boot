@@ -106,7 +106,7 @@ spring.data.mongodb.uri=mongodb://localhost:27017/oscar
 Se for MongoDB Atlas (nuvem), use: 
 
 ```
-mongodb+srv://USUARIO:SENHA@CLUSTER.mongodb.net/NOMEDOBANCO
+spring.data.mongodb.uri=mongodb+srv://USUARIO:SENHA@CLUSTER.mongodb.net/NOMEDOBANCO
 ```
 
 🔹 **O que isso faz?**
