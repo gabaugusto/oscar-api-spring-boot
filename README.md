@@ -54,13 +54,9 @@ São necessárias para compilar e executar o projeto.
 
 ## Configuração do Banco de Dados
 
-**MySQL**: Instale o MySQL ou utilize um container Docker.
+**MySQL**: Instale o MySQL ou utilize um container Docker. Configure as credenciais no arquivo **application.properties**.
 
-Configure as credenciais no arquivo **application.properties**.
-
-**MongoDB**: Crie uma conta ou Instale o MongoDB ou utilize um container Docker.
-
-Configure as credenciais no arquivo **application.properties**.
+**MongoDB**: Crie uma conta para utilizar na nuvem, instale o MongoDB. Configure as credenciais no arquivo **application.properties**.
 
 ## Contribuição
 
