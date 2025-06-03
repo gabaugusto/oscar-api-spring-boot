@@ -43,48 +43,42 @@ Além da API, o projeto inclui interfaces:
 
 ### Pré-requisitos
 
-JDK 17 ou superior
+- JDK 17 ou superior
 
-Docker (opcional, para bancos de dados em containers)
+- Docker (opcional, para bancos de dados em containers)
 
-Maven (para a versão Java)
+- Maven (para a versão Java)
 
-Gradle (para a versão Kotlin)
+- Gradle (para a versão Kotlin)
 
 ### Configuração
 
-Banco de Dados
+#### Banco de Dados
 
-MySQL:
-
-Instale o MySQL ou utilize um container Docker.
+**MySQL**: Instale o MySQL ou utilize um container Docker.
 
 Configure as credenciais no arquivo **application.properties**.
 
-MongoDB:
-
-Instale o MongoDB ou utilize um container Docker.
+**MongoDB**: Instale o MongoDB ou utilize um container Docker.
 
 Configure as credenciais no arquivo **application.properties**.
-
-http://localhost:8080/swagger-ui.html
-```
 
 ## Contribuição
 
 Contribuições são bem-vindas! Siga os passos:
 
-Faça um fork do projeto.
+1. Faça um fork do projeto.
 
-Crie uma branch (git checkout -b feature/nova-funcionalidade).
+2. Crie uma branch (git checkout -b feature/nova-funcionalidade).
 
-Commit suas alterações (git commit -m 'Adiciona nova funcionalidade').
+3. Commit suas alterações (git commit -m 'Adiciona nova funcionalidade').
 
-Push para a branch (git push origin feature/nova-funcionalidade).
+4. Push para a branch (git push origin feature/nova-funcionalidade).
 
-Abra um Pull Request.
+5. Abra um Pull Request.
 
 ## Recursos
+
 - [Documentação Java SpringBoot](https://spring.io/projects/spring-boot)
 - [Documentação Spring Data JPA](https://spring.io/projects/spring-data-jpa)
 - [Documentação Spring Data MongoDB](https://spring.io/projects/spring-data-mongodb)
