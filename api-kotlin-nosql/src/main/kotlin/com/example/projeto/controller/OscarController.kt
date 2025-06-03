@@ -15,6 +15,15 @@ class OscarController(
     private val indicacaoOscarRepository: IndicacaoOscarRepository
 ) {
 
+     /*
+        CRUD          ->  Create, Read/Retrieve, Update and Delete
+        PostMapping   ->  Enviar/criar dados para o banco
+        GetMapping    ->  Trazer dados do banco
+        RequestMapping->  Trazer dados do banco
+        PutMapping    ->  Atualizar dados do banco
+        DeleteMapping ->  Apaga dados do banco
+     */
+
     // Obter todas as indicações
     @GetMapping
     fun getAllIndicacoes(): List<IndicacaoOscar> =
