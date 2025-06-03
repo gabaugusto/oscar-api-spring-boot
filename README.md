@@ -47,19 +47,18 @@ Além da API, o projeto inclui interfaces:
 
 - Docker (opcional, para bancos de dados em containers)
 
-- Maven (para a versão Java)
+- Maven (para a versão Java) ou Gradle (para a versão Kotlin)
 
-- Gradle (para a versão Kotlin)
+Essas ferramentas são como as fundações de uma casa, essenciais para construir e executar o projeto. 
+São necessárias para compilar e executar o projeto.
 
-### Configuração
-
-#### Banco de Dados
+## Configuração do Banco de Dados
 
 **MySQL**: Instale o MySQL ou utilize um container Docker.
 
 Configure as credenciais no arquivo **application.properties**.
 
-**MongoDB**: Instale o MongoDB ou utilize um container Docker.
+**MongoDB**: Crie uma conta ou Instale o MongoDB ou utilize um container Docker.
 
 Configure as credenciais no arquivo **application.properties**.
 
