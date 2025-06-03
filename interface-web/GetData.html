@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,12 +8,14 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="styles/custom.css" rel="stylesheet">
 </head>
+
 <body>
     <div class="container">
         <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
             <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-decoration-none">
                 <svg class="bi me-2" width="40" height="32" viewBox="0 0 16 16">
-                    <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+                    <path
+                        d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z" />
                 </svg>
                 <span class="fs-4">Indicados ao Oscar</span>
             </a>
@@ -21,6 +24,7 @@
                 <li class="nav-item"><a href="Home.html" class="nav-link">Home</a></li>
                 <li class="nav-item"><a href="PostData.html" class="nav-link">Cadastrar</a></li>
                 <li class="nav-item"><a href="GetData.html" class="nav-link active" aria-current="page">Listar</a></li>
+                <li class="nav-item"><a href="GetDataPage.html" class="nav-link">Paginar</a></li>
                 <li class="nav-item"><a href="GetParamData.html" class="nav-link">Buscar</a></li>
                 <li class="nav-item"><a href="UpdateData.html" class="nav-link">Atualizar</a></li>
                 <li class="nav-item"><a href="DeleteData.html" class="nav-link">Apagar</a></li>
@@ -56,7 +60,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         // Exemplo de código para popular a tabela (adaptar conforme sua API)
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             fetch('http://localhost:8080/api/indicacoes')
                 .then(response => // verifica se a resposta foi bem-sucedida
                     response.json() // os dados retornados pela API são convertidos para JSON
@@ -65,7 +69,7 @@
                     console.log(data) // exibe os dados no console para depuração
                     // Seleciona o corpo da tabela onde os dados serão inseridos
                     const tabela = document.getElementById('tabelaResposta').getElementsByTagName('tbody')[0];
-                    
+
                     //
                     data.forEach(item => {
                         const row = tabela.insertRow();
@@ -83,4 +87,5 @@
         });
     </script>
 </body>
+
 </html>
