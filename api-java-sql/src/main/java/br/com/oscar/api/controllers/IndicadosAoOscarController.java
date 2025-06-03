@@ -40,6 +40,17 @@ public class IndicadosAoOscarController {
         return dbConnection.findAll();
     }
 
+    @GetMapping(value = "/pagina", produces = "application/json") // Método que retorna todos os registros do banco de forma paginada
+    public List<IndicadosAoOscar> findAllRecordsPageable(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+        return dbConnection.findAll().stream()
+                .skip(page * size)
+                .limit(size)
+                .toList();
+    }
+    // exemplo de URL: http://localhost:8080/api/indicacoes/pagina?page=0&size=10
+
     @PostMapping(value = "/inserir", produces = "application/json") // Criar um novo registro
     public IndicadosAoOscar create(@RequestBody IndicadosAoOscar exemplo){
         dbConnection.save(exemplo);
