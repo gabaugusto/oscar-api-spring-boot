@@ -13,9 +13,10 @@ import java.util.Optional;
 // Ela é responsável por receber as requisições, processar as informações e retornar uma resposta
 // Ela é responsável por fazer a comunicação entre o cliente e o servidor
 
+// Permite que o front-end acesse a API sem problemas de CORS
 @CrossOrigin
 @RestController // Diz ao SPRING que é uma controladora REST
-@RequestMapping("/indicados") //URL base dessa controladora
+@RequestMapping("/api/indicacoes") //URL base dessa controladora
 public class IndicadosAoOscarController {
 
      /*
@@ -33,8 +34,7 @@ public class IndicadosAoOscarController {
     @Autowired
     IndicadosAoOscarRepository dbConnection;
 
-    @CrossOrigin // Para evitar o erro de CORS
-    @GetMapping("/")
+    @GetMapping
     //Método que retorna todos os registros do banco
     public List<IndicadosAoOscar> findAllRecords(){
         return dbConnection.findAll();
@@ -58,7 +58,7 @@ public class IndicadosAoOscarController {
         return dbConnection.findBynomeIndicadoContaining(name);
     }
 
-    @DeleteMapping(value = "/deletar/id/{id}", produces = "application/json") // Deletar um registro
+    @DeleteMapping(value = "/deletar/{id}", produces = "application/json") // Deletar um registro
     public String delete(@PathVariable int id) {
         IndicadosAoOscar indicado = dbConnection.findIndicadoByidRegistro(id).get();
         dbConnection.delete(indicado);
@@ -79,5 +79,4 @@ public class IndicadosAoOscarController {
         dbConnection.save(indicado);
         return indicado;
     }
-
 }

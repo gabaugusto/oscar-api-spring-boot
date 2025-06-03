@@ -1,29 +1,26 @@
 <!DOCTYPE html>
 <html lang="pt-Br">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Indicados ao Oscar - Enviando Dados</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <title>Indicados ao Oscar - Cadastrar</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="styles/custom.css" rel="stylesheet">
 </head>
-
 <body>
     <div class="container">
         <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
-            <a href="/"
-                class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
-                <svg class="bi me-2" width="40" height="32">
-                    <use xlink:href="#bootstrap"></use>
+            <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-decoration-none">
+                <svg class="bi me-2" width="40" height="32" viewBox="0 0 16 16">
+                    <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
                 </svg>
-                <span class="fs-4">Familia</span>
+                <span class="fs-4">Indicados ao Oscar</span>
             </a>
 
             <ul class="nav nav-pills">
-                <li class="nav-item"><a href="Home.html" class="nav-link active" aria-current="page">Home</a></li>
-                <li class="nav-item"><a href="PostData.html" class="nav-link">Cadastrar</a></li>
+                <li class="nav-item"><a href="Home.html" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="PostData.html" class="nav-link active" aria-current="page">Cadastrar</a></li>
                 <li class="nav-item"><a href="GetData.html" class="nav-link">Listar</a></li>
                 <li class="nav-item"><a href="GetParamData.html" class="nav-link">Buscar</a></li>
                 <li class="nav-item"><a href="UpdateData.html" class="nav-link">Atualizar</a></li>
@@ -31,83 +28,148 @@
             </ul>
         </header>
     </div>
+    
     <div class="container">
         <div class="col-md-12 col-lg-12">
             <h4 class="mb-3">Cadastrar Indicados ao Oscar</h4>
+            <p>Cadastre abaixo novos indicados para alimentar o banco através da API.</p>
 
-            <p>Cadastre abaixo novas Familias para alimentar o banco através da API.</p>
-
-            <form action="http://localhost:8082/indicados/inserir" id="formulario" class="needs-validation">
-
+            <form action="http://localhost:8080/api/indicacoes/inserir" id="formulario" class="needs-validation" novalidate>
                 <div class="row">
-                    <div class="col-sm-6">
-                        <label for="nomeFamilia" class="form-label">Nome Familia:</label>
-                        <input type="text" name="nomeFamilia" id="nomeFamilia" class="form-control">
+                    <div class="col-sm-6 mb-3">
+                        <label for="nomeFilme" class="form-label">Título do Filme:</label>
+                        <input type="text" name="nomeFilme" id="nomeFilme" class="form-control" required>
+                        <div class="invalid-feedback">
+                            Por favor, insira o título do filme.
+                        </div>
                     </div>
 
-                    <div class="col-sm-6">
-                        <label for="status" class="form-label">Status:</label>
-                       
-                        <select name="status" id="status" class="form-select">
-                            <option value="1">Ativo</option>
-                            <option value="0">Inativo</option>
+                    <div class="col-sm-6 mb-3">
+                        <label for="anoFilmagem" class="form-label">Ano:</label>
+                        <input type="number" name="anoFilmagem" id="anoFilmagem" class="form-control" required>
+                        <div class="invalid-feedback">
+                            Por favor, insira o ano do filme.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6 mb-3">
+                        <label for="categoria" class="form-label">Categoria:</label>
+                        <input type="text" name="categoria" id="categoria" class="form-control" required>
+                        <div class="invalid-feedback">
+                            Por favor, insira a categoria.
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 mb-3">
+                        <label for="nomeIndicado" class="form-label">Indicado:</label>
+                        <input type="text" name="nomeIndicado" id="nomeIndicado" class="form-control" required>
+                        <div class="invalid-feedback">
+                            Por favor, insira o nome do indicado.
+                        </div>
+                    </div>
+                </div>
+
+                 <div class="row">
+                    <div class="col-sm-6 mb-3">
+                        <label for="anoCerimonia" class="form-label">Ano da Cerimônia:</label>
+                        <input type="text" name="anoCerimonia" id="anoCerimonia" class="form-control" required>
+                        <div class="invalid-feedback">
+                            Por favor, insira o ano em que a Cerimonia ocorreu.
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 mb-3">
+                        <label for="edicaoCerimonia" class="form-label">Edicao da Cerimônia:</label>
+                        <input type="text" name="edicaoCerimonia" id="edicaoCerimonia" class="form-control" required>
+                        <div class="invalid-feedback">
+                            Por favor, insira a edição da Cerimônia.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6 mb-3">
+                        <label for="vencedor" class="form-label">Vencedor:</label>
+                        <select name="vencedor" id="vencedor" class="form-select" required>
+                            <option value="false">Não</option>
+                            <option value="true">Sim</option>
                         </select>
                     </div>
                 </div>
 
                 <div class="row">
-                    <input type="submit" class="my-4 w-100 btn btn-primary btn-lg"
-                        value="Registrar Familia">
+                    <input type="submit" class="my-4 w-100 btn btn-primary btn-lg" value="Cadastrar Indicado">
                 </div>
+                
                 <div class="row">
                     <div id="response" class="response">
-
+                        <!-- Resposta da API será exibida aqui -->
                     </div>
-
                     <div id="txtFeedback" class="text-red text-center">
-
+                        <!-- Mensagens de erro serão exibidas aqui -->
                     </div>
                 </div>
             </form>
         </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-
-        const btnSubmit = document.querySelector('input[type="submit"]');
-
-        const url = "http://localhost:8080/indicados/inserir";
-
-        const form = document.getElementById('formulario');
-
-        // enviando dados para a API usando FormData e Fetch
-
-        form.addEventListener('submit', async function (event) {
-            event.preventDefault();
-
-            const formData = new FormData(form);
-
-            // FormData é uma interface que permite a construção de um conjunto de pares chave/valor representando  os campos e seus valores.
-            // Ele fornece um modo fácil de construir um conjunto de pares chave/valor que podem ser enviados usando a função fetch().
-
-            const response = await fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(Object.fromEntries(formData))
-            });
-
-            if (response.ok) {
-                alert('Registro inserido com sucesso!');
-                console.log(response);
-            } else {
-                alert('Erro ao inserir registro!');
-            }
-        });
-
-
-
+        // Validação do formulário
+        (function() {
+            'use strict' // Modo estrito para evitar erros comuns como variáveis não declaradas
+            
+            const form = document.getElementById('formulario')
+            
+            form.addEventListener('submit', async function(event) {
+                if (!form.checkValidity()) {
+                    event.preventDefault() // Impede o envio do formulário se não for válido
+                    event.stopPropagation() // Impede a propagação do evento -> Propagação quer dizer que o evento não será enviado para outros elementos
+                } else {
+                    event.preventDefault() // Impede o envio do formulário 
+                    
+                    const formData = new FormData(form)
+                    const responseDiv = document.getElementById('response')
+                    const feedbackDiv = document.getElementById('txtFeedback')
+                    
+                    try {
+                        const response = await fetch(form.action, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(Object.fromEntries(formData))
+                        })
+                        
+                        if (response.ok) {
+                            const data = await response.json()
+                            responseDiv.innerHTML = `
+                                <h5>Registro inserido com sucesso!</h5>
+                                <p>Título: ${data.nomeFilme}</p>
+                                <p>Ano: ${data.anoFilmagem}</p>
+                                <p>Ano da Cerimônia: ${data.anoCerimonia}</p>
+                                <p>Edição da Cerimônia: ${data.edicaoCerimonia}</p>
+                                <p>Categoria: ${data.categoria}</p>
+                                <p>Indicado: ${data.nomeIndicado}</p>
+                                <p>Vencedor: ${data.vencedor ? 'Sim' : 'Não'}</p>
+                            `
+                            feedbackDiv.textContent = ''
+                            //form.reset()
+                        } else {
+                            const error = await response.json()
+                            throw new Error(error.message || 'Erro ao cadastrar')
+                        }
+                    } catch (error) {
+                        feedbackDiv.textContent = error.message
+                        responseDiv.innerHTML = ''
+                    }
+                }
+                
+                form.classList.add('was-validated')
+            }, false)
+        })()
     </script>
 </body>
-
 </html>

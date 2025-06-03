@@ -8,6 +8,7 @@
     <title>Indicados ao Oscar</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link href="styles/custom.css" rel="stylesheet">
 </head>
 
 <body>
@@ -34,7 +35,7 @@
     <div class="container">
         <div class="col-md-12 col-lg-12">
             <h4 class="mb-3">Buscar Indicados ao Oscar</h4>
-            <p class="mb-3">Consumindo a API de Indicados ao Oscar para encontrar um Único Registro.</p>
+            <p class="mb-3">Consumindo a API de Indicados ao Oscar para filtrar registros.</p>
 
             <table id="tabelaResposta" class="table">
 
@@ -49,7 +50,7 @@
         const tabelaResposta = document.getElementById("tabelaResposta");
 
         // URL da API
-        var url = "http://localhost:8080/indicados/";
+        var url = "http://localhost:8080/api/indicacoes"; // URL padrão para buscar todos os registros
 
         // Buscando parametros da URL
         const urlParams = new URLSearchParams(window.location.search);
@@ -62,18 +63,18 @@
 
         // Se o id for diferente de null, a URL será alterada para buscar um único registro
         if (id != null) {
-            url = `http://localhost:8080/indicados/buscar/id/${id}`;
-        }
+            url = `http://localhost:8080/api/indicacoes/buscar/id/${id}`;
+        } // Exemplo de uso: GetParamData.html?id=100
 
         // se o nome for diferente de null, a URL será alterada para buscar um único registro
         if (nome != null) {
-            url = `http://localhost:8080/indicados/buscar/nome/${nome}`;
-        }
+            url = `http://localhost:8080/api/indicacoes/buscar/nome/${nome}`;
+        } // Exemplo de uso: GetParamData.html?nome=karen
 
         // Nesse exemplo a URL trabalha com id ou o nome, mas poderia ser feito para qualquer campo da tabela.
 
         // Esse modelo utiliza o comando fetch e trabalha com promessas. 
-        fetch(url)
+        fetch("http://localhost:8080/api/indicacoes")
             .then(response => {
                 return response.json();
             })
@@ -87,16 +88,16 @@
                 //tabelaResposta.innerHTML += "<tr><td>" + resposta.nomeIndicado + "</td><td>" + resposta.categoria + "</td></tr>";
 
 
-                //Em uma busca por ID, o retorno é um objeto, então não é necessário um loop
+                //Em uma busca por ID, o retorno é um único elemento, então não é necessário um loop
                 if (id != null) {
                     tabelaResposta.innerHTML += "<tr><td>" + resposta.nomeIndicado + "</td><td>" + resposta.categoria + "</td></tr>";
-                }
-
-                //Em uma busca por Nome, o retorno é um array, então é necessário um loop
-                if (nome != null) {
+                } else if (nome != null) {  //Em uma busca por Nome, o retorno é um array, então é necessário um loop
                     for (let i = 0; i < resposta.length; i++) {
                         tabelaResposta.innerHTML += "<tr><td>" + resposta[i].nomeIndicado + "</td><td>" + resposta[i].categoria + "</td></tr>";
                     }
+                } else {
+                    console.error("Erro: Por favor, informe apenas um parâmetro de busca.");
+                    tabelaResposta.innerHTML += "<tr><td colspan='2' class='text-center'>Por favor, observe os parâmetros de busca.</td></tr>";
                 }
 
             })

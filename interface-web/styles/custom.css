@@ -1,0 +1,241 @@
+:root {
+    --purple-200: #BB86FC;
+    --purple-500: #6200EE;
+    --purple-700: #3700B3;
+    --teal-200: #03DAC5;
+    --teal-700: #018786;
+    --black: #000000;
+    --white: #FFFFFF;
+    --dark: #171725;
+    --soft-dark: #696974;
+    --blue-accent: #12CDD9;
+    --background-color: #1F1D2B;
+    --green: #22B07D;
+    --orange: #FF8700;
+    --red: #FB4141;
+    --text-black: #171725;
+    --text-dark-gray: #696974;
+    --text-light-gray: #92929D;
+    --text-white: #F1F1F5;
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-white);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.container {
+    max-width: 1200px;
+}
+
+header {
+    border-bottom-color: var(--soft-dark) !important;
+}
+
+.nav-pills .nav-link {
+    color: var(--text-light-gray);
+    margin: 0 5px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.nav-pills .nav-link:hover {
+    color: var(--text-white);
+    background-color: rgba(18, 205, 217, 0.1);
+}
+
+.nav-pills .nav-link.active {
+    background-color: var(--blue-accent);
+    color: var(--text-black);
+    font-weight: 500;
+}
+
+.fs-4 {
+    color: var(--text-white);
+    font-weight: 600;
+}
+
+/* Estilo para o logo/svg */
+.bi {
+    fill: var(--blue-accent);
+}
+
+/* Efeito hover para itens clicáveis */
+a {
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: var(--blue-accent) !important;
+}
+
+/* Tabelas */
+.table-responsive {
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.table {
+    width: 100%;
+    margin-bottom: 1rem;
+    color: var(--text-white);
+    background-color: var(--dark);
+    border-collapse: collapse;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.table th {
+    background-color: var(--purple-700);
+    color: var(--text-white);
+    padding: 12px;
+    text-align: left;
+    text-align: center;
+}
+
+.table td {
+    padding: 12px;
+    border-top: 1px solid var(--soft-dark);
+}
+
+h4 {
+    color: var(--blue-accent);
+    margin-top: 20px;
+}
+
+p {
+    color: var(--text-light-gray);
+}
+
+/* Efeito hover para linhas da tabela */
+.table tbody tr:hover {
+    background-color: rgba(18, 205, 217, 0.1) !important;
+    transition: background-color 0.2s ease;
+}
+
+/* formulários */
+.form-control,
+.form-select {
+    background-color: var(--dark);
+    color: var(--text-white);
+    border: 1px solid var(--soft-dark);
+    padding: 10px 15px;
+}
+
+.form-control:focus,
+.form-select:focus {
+    background-color: var(--dark);
+    color: var(--text-white);
+    border-color: var(--blue-accent);
+    box-shadow: 0 0 0 0.25rem rgba(18, 205, 217, 0.25);
+}
+
+.form-label {
+    color: var(--text-light-gray);
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.btn-primary {
+    background-color: var(--blue-accent);
+    border-color: var(--blue-accent);
+    color: var(--text-black);
+    font-weight: 500;
+    padding: 12px;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: var(--teal-200);
+    border-color: var(--teal-200);
+    color: var(--text-black);
+}
+
+.response {
+    padding: 15px;
+    margin-top: 20px;
+    border-radius: 8px;
+    background-color: rgba(18, 205, 217, 0.1);
+    color: var(--text-white);
+}
+
+.text-red {
+    color: var(--red);
+    margin-top: 15px;
+}
+
+h4 {
+    color: var(--blue-accent);
+    margin-top: 20px;
+}
+
+p {
+    color: var(--text-light-gray);
+    margin-bottom: 25px;
+}
+
+/* Estilos específicos para a página de exclusão */
+.form-control {
+    background-color: var(--dark);
+    color: var(--text-white);
+    border: 1px solid var(--soft-dark);
+    padding: 10px 15px;
+}
+
+.form-control:focus {
+    background-color: var(--dark);
+    color: var(--text-white);
+    border-color: var(--red);
+    box-shadow: 0 0 0 0.25rem rgba(251, 65, 65, 0.25);
+}
+
+.form-label {
+    color: var(--text-light-gray);
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.btn-primary {
+    background-color: var(--red);
+    border-color: var(--red);
+    color: var(--text-white);
+    font-weight: 500;
+    padding: 10px 20px;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #e03535;
+    border-color: #e03535;
+}
+
+#confirmationModal .modal-content {
+    background-color: var(--background-color);
+    color: var(--text-white);
+    border: 1px solid var(--soft-dark);
+}
+
+#confirmationModal .modal-header {
+    border-bottom-color: var(--soft-dark);
+}
+
+#confirmationModal .modal-footer {
+    border-top-color: var(--soft-dark);
+}
+
+h4 {
+    color: var(--red);
+    margin-top: 20px;
+}
+
+p {
+    color: var(--text-light-gray);
+    margin-bottom: 25px;
+}
+
+.alert {
+    margin-top: 20px;
+}

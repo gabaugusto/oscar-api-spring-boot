@@ -29,7 +29,7 @@ public class IndicadosAoOscar {
     @Column(name = "nome_indicado")
     public String nomeIndicado;
 
-    public char vencedor;
+    public boolean vencedor;
 
     public int getIdRegistro() {
         return idRegistro;
@@ -87,11 +87,11 @@ public class IndicadosAoOscar {
         this.nomeIndicado = nomeIndicado;
     }
 
-    public char getVencedor() {
+    public boolean getVencedor() {
         return vencedor;
     }
 
-    public void setVencedor(char vencedor) {
+    public void setVencedor(boolean vencedor) {
         this.vencedor = vencedor;
     }
 }
