@@ -12,6 +12,8 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class OscarViewModel : ViewModel() {
+    // Essa classe gerencia a manipulação dos dados de indicações do Oscar
+    // Mas esse gerenciamento é feito com o foco de exibição na interface do usuário
     private val _indicacoes = MutableStateFlow<List<IndicacaoOscar>>(emptyList())
     open val indicacoes: StateFlow<List<IndicacaoOscar>> = _indicacoes.asStateFlow()
 
@@ -21,6 +23,7 @@ class OscarViewModel : ViewModel() {
     private val _error = MutableStateFlow<String?>(null)
     val error: StateFlow<String?> = _error.asStateFlow()
 
+    // Método para buscar as indicações
     fun fetchIndicacoes() {
         viewModelScope.launch {
             _isLoading.value = true

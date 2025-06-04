@@ -36,7 +36,9 @@ fun NavGraph() {
                 }
             )
         },
-        bottomBar = { BottomAppBarNavigation(navController) }
+        bottomBar = {
+            BottomAppBarNavigation(navController)
+        }
     ) { paddingValues ->
         NavHost(
             navController = navController,

@@ -42,11 +42,15 @@ fun ListaIndicacoesScreen(viewModel: OscarViewModel = viewModel()) {
     }
 
     if (isLoading) {
-        CircularProgressIndicator(modifier = Modifier.fillMaxSize().wrapContentSize(Alignment.Center))
+        CircularProgressIndicator(
+            modifier = Modifier
+                .fillMaxSize()
+                .wrapContentSize(Alignment.Center))
     }
 
     error?.let {
         Text(
+            //text = "Sem conexão com a internet. Tente novamente mais tarde.",
             text = it,
             color = Color.Red,
             modifier = Modifier.padding(16.dp)
@@ -59,13 +63,17 @@ fun ListaIndicacoesScreen(viewModel: OscarViewModel = viewModel()) {
             if (filtroAplicado) {
                 Badge(modifier = Modifier.offset((-8).dp, 8.dp)) {
                     Text("!")
+                }
             }
         }
-    } }
 
-    LazyColumn {
-        items(indicacoes) { indicacao ->
-            IndicacaoItem(indicacao = indicacao)
+        LazyColumn (
+            Modifier.fillMaxSize()
+        ) {
+            // items é o termo utilizado para todos os elemetos da LazyColumn
+            items(indicacoes) { indicacao ->
+                IndicacaoItem(indicacao = indicacao)
+            }
         }
     }
 }
