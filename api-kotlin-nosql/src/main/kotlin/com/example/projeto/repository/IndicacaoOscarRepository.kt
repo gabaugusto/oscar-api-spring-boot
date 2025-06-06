@@ -17,6 +17,8 @@ interface IndicacaoOscarRepository : MongoRepository<IndicacaoOscar, String> {
 
     fun findByVencedor(vencedor: Boolean): List<IndicacaoOscar>
 
+    fun findByIdRegistro(idRegistro: Int): List<IndicacaoOscar>
+
     fun findByNomeDoIndicadoContainingIgnoreCase(nome: String): List<IndicacaoOscar>
 
     fun findByNomeDoFilmeContainingIgnoreCase(filme: String): List<IndicacaoOscar>

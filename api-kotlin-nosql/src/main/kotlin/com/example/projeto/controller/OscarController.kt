@@ -8,51 +8,40 @@ import org.springframework.data.domain.Sort
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
-@CrossOrigin(origins = ["*"]) // Permite requisições de qualquer origem
+@CrossOrigin(origins = ["*"])
 @RestController
 @RequestMapping("/api/indicacoes")
 class OscarController(
     private val indicacaoOscarRepository: IndicacaoOscarRepository
 ) {
 
-     /*
-        CRUD          ->  Create, Read/Retrieve, Update and Delete
-        PostMapping   ->  Enviar/criar dados para o banco
-        GetMapping    ->  Trazer dados do banco
-        RequestMapping->  Trazer dados do banco
-        PutMapping    ->  Atualizar dados do banco
-        DeleteMapping ->  Apaga dados do banco
-     */
-
-    // Obter todas as indicações
     @GetMapping
     fun getAllIndicacoes(): List<IndicacaoOscar> =
         indicacaoOscarRepository.findAll()
 
-    // Obter indicação por ID
     @GetMapping("/{id}")
     fun getIndicacaoById(@PathVariable id: String): ResponseEntity<IndicacaoOscar> {
         return indicacaoOscarRepository.findById(id)
             .map { indicacao -> ResponseEntity.ok(indicacao) }
-            .orElse(ResponseEntity.notFound().build())
+            .orElseGet { ResponseEntity.notFound().build() }
     }
 
-    // Obter indicações por ano da cerimônia
+    @GetMapping("/registro/{idRegistro}")
+    fun getIndicacoesByIdRegistro(@PathVariable idRegistro: Int): List<IndicacaoOscar> =
+        indicacaoOscarRepository.findByIdRegistro(idRegistro)
+
     @GetMapping("/ano/{ano}")
     fun getIndicacoesByAno(@PathVariable ano: Int): List<IndicacaoOscar> =
         indicacaoOscarRepository.findByAnoCerimonia(ano)
 
-    // Obter vencedores ou não vencedores
     @GetMapping("/vencedores/{vencedor}")
     fun getIndicacoesByVencedor(@PathVariable vencedor: Boolean): List<IndicacaoOscar> =
         indicacaoOscarRepository.findByVencedor(vencedor)
 
-    // Obter indicações por nome do indicado (busca parcial case insensitive)
     @GetMapping("/indicado/{nome}")
     fun getIndicacoesByNomeIndicado(@PathVariable nome: String): List<IndicacaoOscar> =
         indicacaoOscarRepository.findByNomeDoIndicadoContainingIgnoreCase(nome)
 
-    // Obter indicações por nome do filme (busca parcial case insensitive)
     @GetMapping("/filme/{nomeFilme}")
     fun getIndicacoesByNomeFilme(@PathVariable nomeFilme: String): List<IndicacaoOscar> =
         indicacaoOscarRepository.findByNomeDoFilmeContainingIgnoreCase(nomeFilme)
@@ -65,45 +54,86 @@ class OscarController(
     ): Page<IndicacaoOscar> {
         return indicacaoOscarRepository.findByCategoria(
             categoria,
-            PageRequest.of(page, size, Sort.by("nomeDoIndicado")))
+            PageRequest.of(page, size, Sort.by("nomeDoIndicado"))
+        )
     }
 
-    // Criar nova indicação
     @PostMapping
     fun createIndicacao(@RequestBody indicacao: IndicacaoOscar): IndicacaoOscar =
         indicacaoOscarRepository.save(indicacao)
+    // Exemplo de body para criar
+    // {
+    //     "idRegistro": 9991110,
+    //     "anoFilmagem": 2022,
+    //     "anoCerimonia": 2023,
+    //     "cerimonia": 95,
+    //     "categoria": "Melhor Filme",
+    //     "nomeDoIndicado": "Filme Exemplo",
+    //     "nomeDoFilme": "Filme Exemplo",
+    //     "vencedor": false
+    // }
 
-    // Atualizar indicação
-    @PutMapping("/{id}")
+    @PutMapping("/{idRegistro}")
     fun updateIndicacao(
-        @PathVariable id: String,
+        @PathVariable idRegistro: Int,
         @RequestBody indicacaoAtualizada: IndicacaoOscar
     ): ResponseEntity<IndicacaoOscar> {
-        return indicacaoOscarRepository.findById(id)
-            .map { indicacaoExistente ->
-                val updatedIndicacao = indicacaoExistente.copy(
-                    idRegistro = indicacaoAtualizada.idRegistro,
-                    anoFilmagem = indicacaoAtualizada.anoFilmagem,
-                    anoCerimonia = indicacaoAtualizada.anoCerimonia,
-                    cerimonia = indicacaoAtualizada.cerimonia,
-                    categoria = indicacaoAtualizada.categoria,
-                    nomeDoIndicado = indicacaoAtualizada.nomeDoIndicado,
-                    nomeDoFilme = indicacaoAtualizada.nomeDoFilme,
-                    vencedor = indicacaoAtualizada.vencedor
-                )
-                ResponseEntity.ok(indicacaoOscarRepository.save(updatedIndicacao))
-            }
-            .orElse(ResponseEntity.notFound().build())
-    }
+        val indicacaoExistente = indicacaoOscarRepository.findByIdRegistro(idRegistro)
 
-    // Deletar indicação
-    @DeleteMapping("/{id}")
-    fun deleteIndicacao(@PathVariable id: String): ResponseEntity<Void> {
-        return indicacaoOscarRepository.findById(id)
-            .map { indicacao ->
-                indicacaoOscarRepository.delete(indicacao)
-                ResponseEntity.noContent().build<Void>()
-            }
-            .orElse(ResponseEntity.notFound().build())
+        return if (indicacaoExistente != null) {
+            val updatedIndicacao = IndicacaoOscar(
+                idRegistro = indicacaoAtualizada.idRegistro,
+                anoFilmagem = indicacaoAtualizada.anoFilmagem,
+                anoCerimonia = indicacaoAtualizada.anoCerimonia,
+                cerimonia = indicacaoAtualizada.cerimonia,
+                categoria = indicacaoAtualizada.categoria,
+                nomeDoIndicado = indicacaoAtualizada.nomeDoIndicado,
+                nomeDoFilme = indicacaoAtualizada.nomeDoFilme,
+                vencedor = indicacaoAtualizada.vencedor
+            )
+            ResponseEntity.ok(indicacaoOscarRepository.save(updatedIndicacao))
+        } else {
+            ResponseEntity.notFound().build()
+        }
     }
+    // {
+    //     "idRegistro": 9991110,
+    //     "anoFilmagem": 2022,
+    //     "anoCerimonia": 2023,
+    //     "cerimonia": 95,
+    //     "categoria": "Melhor Filme Atualizado",
+    //     "nomeDoIndicado": "Filme Exemplo Atualizado",
+    //     "nomeDoFilme": "Filme Exemplo Atualizado",
+    //     "vencedor": false
+    // }
+
+    @PatchMapping("/{idRegistro}/vencedor")
+    fun updateVencedor(
+        @PathVariable idRegistro: Int,  // Mantendo consistência com o nome na URL
+        @RequestParam vencedor: Boolean
+    ) {
+        return indicacaoOscarRepository.findByIdRegistro(idRegistro)
+            .let { optionalIndicacao ->
+                optionalIndicacao.map { indicacao ->
+                    indicacao.copy(vencedor = vencedor).let { updated ->
+                        ResponseEntity.ok(indicacaoOscarRepository.save(updated))
+                    }
+                }
+            }
+    }
+    // Exemplo de endpoint para corrigir
+    // api/indicacoes/{id}/vencedor?vencedor=true
+
+    @DeleteMapping("registro/{idRegistro}")
+    fun deleteIndicacao(@PathVariable idRegistro: Int): ResponseEntity<Void> {
+        return when (val indicacoes = indicacaoOscarRepository.findByIdRegistro(idRegistro)) {
+            null, emptyList<IndicacaoOscar>() -> ResponseEntity.notFound().build()
+            else -> {
+                indicacoes.forEach { indicacaoOscarRepository.delete(it) }
+                ResponseEntity.noContent().build()
+            }
+        }
+    }
+    // Exemplo de endpoint para apagar
+    // api/indicacoes/registro/{idRegistro}
 }
