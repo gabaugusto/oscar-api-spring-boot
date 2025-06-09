@@ -58,6 +58,27 @@ Essas ferramentas são como as fundações de uma casa, essenciais para construi
 
 ## 📚 Visão Geral da API
 
+## 🗺️ Fluxograma de Integração
+
+A API é responsável por gerenciar as indicações ao Oscar, permitindo que usuários consultem, adicionem, atualizem e removam registros de indicações. A seguir, um fluxograma simplificado da interação entre o usuário, o front-end e a API:
+
+```mermaid
+flowchart LR
+    A[Usuário] -->|Interação| B[Front-end Web/Mobile]
+    B -->|Requisições HTTP (JSON)| C[API Oscar (Spring Boot)]
+    C -->|Consultas e comandos| D[(Banco de Dados<br>MySQL/MongoDB)]
+    D -->|Dados| C
+    C -->|Respostas JSON| B
+    B -->|Exibe informações| A
+```
+**Legenda:**
+- O usuário interage com o front-end (web ou mobile).
+- O front-end faz requisições HTTP para a API.
+- A API processa as requisições, acessa o banco de dados e retorna os dados ao front-end.
+- O front-end exibe as informações ao usuário.
+
+---## 📑 Documentação da API
+
 A API permite:
 
 - Consultar indicações
