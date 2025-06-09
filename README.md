@@ -278,8 +278,6 @@ DELETE http://localhost:8080/api/indicacoes/indicado/9991110
 
 ## 📝 Considerações Finais
 
-- Todos os endpoints requerem autenticação (se aplicável).
-- As datas devem seguir o formato **ISO-8601** (`YYYY-MM-DD`).
 - Para nomes com espaços, utilize **URL encoding** (ex: `"Brad Pitt"` → `Brad%20Pitt`).
 - Para dúvidas ou suporte, entre em contato com a equipe de desenvolvimento.
 
