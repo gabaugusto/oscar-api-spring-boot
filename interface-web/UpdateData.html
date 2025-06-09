@@ -27,7 +27,8 @@
                 <li class="nav-item"><a href="PostData.html" class="nav-link">Cadastrar</a></li>
                 <li class="nav-item"><a href="GetData.html" class="nav-link">Listar</a></li>
                 <li class="nav-item"><a href="GetParamData.html" class="nav-link">Buscar</a></li>
-                <li class="nav-item"><a href="UpdateData.html" class="nav-link active" aria-current="page">Atualizar</a></li>
+                <li class="nav-item"><a href="UpdateData.html" class="nav-link active" aria-current="page">Atualizar</a>
+                </li>
                 <li class="nav-item"><a href="DeleteData.html" class="nav-link">Apagar</a></li>
             </ul>
         </header>
@@ -148,7 +149,7 @@
             var id = document.getElementById("id").value;
 
             // URL da API
-            var url = `http://localhost:8080/api/indicacoes/buscar/id/${id}`;
+            var url = `http://localhost:8080/api/indicacoes/id/${id}`;
 
             fetch(url)
                 .then(response => {
@@ -170,10 +171,10 @@
                     document.getElementById("nomeFilme").value = resposta.nomeFilme ? resposta.nomeFilme.toString() : ""; // Verifica se o nome do filme existe e define o valor do input
                     document.getElementById("nomeIndicado").value = resposta.nomeIndicado ? resposta.nomeIndicado.toString() : "";
                     document.getElementById("categoria").value = resposta.categoria ? resposta.categoria.toString() : "";
-                    document.getElementById("anoFilmagem").value = resposta.anoCerimonia ? resposta.anoCerimonia.toString() : "";
-                    document.getElementById("anoCerimonia").value = resposta.anoFilmagem ? resposta.anoFilmagem.toString() : ""; // Verifica se o ano da filmagem existe e define o valor do input
+                    document.getElementById("anoFilmagem").value = resposta.anoFilmagem ? resposta.anoFilmagem.toString() : "";
+                    document.getElementById("anoCerimonia").value = resposta.anoCerimonia ? resposta.anoCerimonia.toString() : ""; // Verifica se o ano da cerimônia existe e define o valor do input
                     document.getElementById("edicaoCerimonia").value = resposta.edicaoCerimonia ? resposta.edicaoCerimonia.toString() : ""; // Verifica se o nome do indicado existe e define o valor do input
-                    document.getElementById("vencedor").value = resposta.vencedor ? true : false; // Verifica se o indicado é vencedor e define o valor do select
+                    document.getElementById("vencedor").value = resposta.vencedor ? "true" : "false"; // Verifica se o indicado é vencedor e define o valor do select
                     // Verifica se o indicado é vencedor e define o valor do select
                 })
         }
@@ -185,21 +186,16 @@
             // coleto o id do primeiro formulario e o valor dos campos do segundo formulario
             // Uso FormData para coletar os valores do segundo formulario
             var id = document.getElementById("id").value;
-
-            var formData = new FormData(document.getElementById("segundo"));
-            var nomeFilme = formData.get("nomeFilme");
-            var nomeIndicado = formData.get("nomeIndicado");
-            var categoria = formData.get("categoria");
-            var anoFilmagem = formData.get("anoFilmagem");
-            var vencedor;
-            if (formData.get("vencedor") === "true") {
-                vencedor = 1;
-            } else {
-                vencedor = 0;
-            }
+            var nomeFilme = segundo.nomeFilme.value;
+            var nomeIndicado = segundo.nomeIndicado.value;
+            var categoria = segundo.categoria.value;
+            var anoFilmagem = segundo.anoFilmagem.value;
+            var anoCerimonia = segundo.anoCerimonia.value;
+            var edicaoCerimonia = segundo.edicaoCerimonia.value;
+            var vencedor = segundo.vencedor.value === "true";
 
             // URL da API
-            var url = `http://localhost:8080/api/indicacoes/atualizar/${id}`;
+            var url = `http://localhost:8080/api/indicacoes/${id}`;
 
             fetch(url, {
                 method: 'PUT',
@@ -211,11 +207,13 @@
                     nomeFilme: nomeFilme,
                     categoria: categoria,
                     anoFilmagem: anoFilmagem,
+                    anoCerimonia: anoCerimonia,
+                    edicaoCerimonia: edicaoCerimonia,
                     vencedor: vencedor
                 })
             })
                 .then(response => {
-                    response.json();
+                    return response.json();
                 })
                 .then(resposta => {
                     console.log(resposta);

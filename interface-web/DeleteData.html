@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,28 +9,31 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="styles/custom.css" rel="stylesheet">
 </head>
+
 <body>
     <div class="container">
         <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
             <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-decoration-none">
                 <svg class="bi me-2" width="40" height="32" viewBox="0 0 16 16">
-                    <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+                    <path
+                        d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z" />
                 </svg>
                 <span class="fs-4">Indicados ao Oscar</span>
             </a>
 
             <ul class="nav nav-pills">
-                <li class="nav-item"><a href="Home.html" class="nav-link" >Home</a></li>
+                <li class="nav-item"><a href="Home.html" class="nav-link">Home</a></li>
                 <li class="nav-item"><a href="PostData.html" class="nav-link">Cadastrar</a></li>
                 <li class="nav-item"><a href="GetData.html" class="nav-link">Listar</a></li>
                 <li class="nav-item"><a href="GetDataPage.html" class="nav-link">Paginar</a></li>
                 <li class="nav-item"><a href="GetParamData.html" class="nav-link">Buscar</a></li>
                 <li class="nav-item"><a href="UpdateData.html" class="nav-link">Atualizar</a></li>
-                <li class="nav-item"><a href="DeleteData.html" class="nav-link active" aria-current="page">Apagar</a></li>
+                <li class="nav-item"><a href="DeleteData.html" class="nav-link active" aria-current="page">Apagar</a>
+                </li>
             </ul>
         </header>
     </div>
-    
+
     <div class="container">
         <h4 class="mb-3">Apagar Indicados ao Oscar</h4>
         <p>Informe o ID do registro no campo abaixo para apagar um indicado do banco de dados.</p>
@@ -38,14 +42,14 @@
             <div class="mb-3">
                 <label for="id" class="form-label">ID do Registro</label>
                 <input type="text" class="form-control" id="id" name="id" required
-                       placeholder="Digite o ID que deseja apagar">
+                    placeholder="Digite o ID que deseja apagar">
                 <div class="invalid-feedback">
                     Por favor, informe um ID válido.
                 </div>
             </div>
             <button type="submit" class="btn btn-primary">Apagar Registro</button>
         </form>
-        
+
         <div id="alertPlaceholder"></div>
     </div>
 
@@ -71,38 +75,38 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const form = document.getElementById('deleteForm');
             const confirmationModal = new bootstrap.Modal(document.getElementById('confirmationModal'));
             let currentIdToDelete = null;
-            
+
             // Mostrar modal de confirmação ao enviar o formulário
-            form.addEventListener('submit', function(event) {
+            form.addEventListener('submit', function (event) {
                 event.preventDefault();
-                
+
                 const idInput = document.getElementById('id');
                 if (!idInput.value.trim()) {
                     idInput.classList.add('is-invalid');
                     return;
                 }
-                
+
                 currentIdToDelete = idInput.value.trim();
                 document.getElementById('modalId').textContent = currentIdToDelete;
                 confirmationModal.show();
             });
-            
+
             // Confirmar exclusão
-            document.getElementById('confirmDelete').addEventListener('click', async function() {
+            document.getElementById('confirmDelete').addEventListener('click', async function () {
                 confirmationModal.hide();
-                
+
                 try {
                     const response = await fetch(`http://localhost:8080/api/indicacoes/deletar/${currentIdToDelete}`, {
                         method: 'DELETE'
                     });
-                    
-                    showAlert(response.ok ? 'success' : 'danger', 
-                             response.ok ? 'Registro apagado com sucesso!' : 'Erro ao apagar registro!');
-                    
+
+                    showAlert(response.ok ? 'success' : 'danger',
+                        response.ok ? 'Registro apagado com sucesso!' : 'Erro ao apagar registro!');
+
                     if (response.ok) {
                         form.reset();
                     }
@@ -110,7 +114,7 @@
                     showAlert('danger', 'Erro na conexão com o servidor.');
                 }
             });
-            
+
             // Função para mostrar alertas
             function showAlert(type, message) {
                 const alertPlaceholder = document.getElementById('alertPlaceholder');
@@ -121,10 +125,10 @@
                     '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
                     '</div>'
                 ].join('');
-                
+
                 alertPlaceholder.innerHTML = '';
                 alertPlaceholder.append(wrapper);
-                
+
                 // Estilizar os alertas
                 const alert = wrapper.querySelector('.alert');
                 if (type === 'success') {
@@ -140,4 +144,5 @@
         });
     </script>
 </body>
+
 </html>

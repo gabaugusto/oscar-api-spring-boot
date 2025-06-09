@@ -58,18 +58,18 @@
 
         // recebendo o parametro id da URL (se existir)
         var id = urlParams.get('id'); // Ao não ser informado um id o valor padrão será null
-
+    
         // recebendo o parametro nome da URL (se existir)
         var nome = urlParams.get('nome'); // Ao não ser informado um nome o valor padrão será null
 
         // Se o id for diferente de null, a URL será alterada para buscar um único registro
         if (id != null) {
-            url = `http://localhost:8080/api/indicacoes/buscar/id/${id}`;
+            url = `http://localhost:8080/api/indicacoes/id/${id}`;
         } // Exemplo de uso: GetParamData.html?id=100
 
         // se o nome for diferente de null, a URL será alterada para buscar um único registro
         if (nome != null) {
-            url = `http://localhost:8080/api/indicacoes/buscar/nome/${nome}`;
+            url = `http://localhost:8080/api/indicacoes/indicado/${nome}`;
         } // Exemplo de uso: GetParamData.html?nome=karen
 
         // Nesse exemplo a URL trabalha com id ou o nome, mas poderia ser feito para qualquer campo da tabela.

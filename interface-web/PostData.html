@@ -35,7 +35,7 @@
             <h4 class="mb-3">Cadastrar Indicados ao Oscar</h4>
             <p>Cadastre abaixo novos indicados para alimentar o banco através da API.</p>
 
-            <form action="http://localhost:8080/api/indicacoes/inserir" id="formulario" class="needs-validation" novalidate>
+            <form action="http://localhost:8080/api/indicacoes" id="formulario" class="needs-validation" novalidate>
                 <div class="row">
                     <div class="col-sm-6 mb-3">
                         <label for="nomeFilme" class="form-label">Título do Filme:</label>
@@ -125,6 +125,7 @@
             const form = document.getElementById('formulario')
             
             form.addEventListener('submit', async function(event) {
+                
                 if (!form.checkValidity()) {
                     event.preventDefault() // Impede o envio do formulário se não for válido
                     event.stopPropagation() // Impede a propagação do evento -> Propagação quer dizer que o evento não será enviado para outros elementos
