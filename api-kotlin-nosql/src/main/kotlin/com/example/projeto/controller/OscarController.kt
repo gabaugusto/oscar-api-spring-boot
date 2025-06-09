@@ -15,9 +15,15 @@ class OscarController(
     private val indicacaoOscarRepository: IndicacaoOscarRepository
 ) {
 
+    // CRUD
+    // CREATE, READ, UPDATE   , DELETE
+    // POST  , GET , PUT/PATCH, DELETE
+
     @GetMapping
     fun getAllIndicacoes(): List<IndicacaoOscar> =
         indicacaoOscarRepository.findAll()
+    // Exemplo de endpoint para pegar todos
+    // api/indicacoes
 
     @GetMapping("/{id}")
     fun getIndicacaoById(@PathVariable id: String): ResponseEntity<IndicacaoOscar> {
@@ -25,6 +31,8 @@ class OscarController(
             .map { indicacao -> ResponseEntity.ok(indicacao) }
             .orElseGet { ResponseEntity.notFound().build() }
     }
+    // Exemplo de endpoint para pegar por ID
+    // api/indicacoes/{id}
 
     @GetMapping("/registro/{idRegistro}")
     fun getIndicacoesByIdRegistro(@PathVariable idRegistro: Int): List<IndicacaoOscar> =
@@ -58,6 +66,7 @@ class OscarController(
         )
     }
 
+    // Exemplo de endpoint para atualizar uma indicação
     @PostMapping
     fun createIndicacao(@RequestBody indicacao: IndicacaoOscar): IndicacaoOscar =
         indicacaoOscarRepository.save(indicacao)
@@ -72,6 +81,8 @@ class OscarController(
     //     "nomeDoFilme": "Filme Exemplo",
     //     "vencedor": false
     // }
+    // Exemplo de endpoint para criar
+    // api/indicacoes
 
     @PutMapping("/{idRegistro}")
     fun updateIndicacao(
