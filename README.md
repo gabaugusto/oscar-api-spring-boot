@@ -67,7 +67,7 @@ A API é responsável por gerenciar as indicações ao Oscar, permitindo que usu
 ```mermaid
 flowchart LR
     A[Usuário] -->|Interação| B[Front-end Web/Mobile]
-    B -->|Requisições | C[API Oscar(Spring Boot)]
+    B -->|Requisições | C[API Oscar Spring Boot]
     C -->|Consultas e comandos| D[Banco de Dados MySQL/MongoDB]
     D -->|Dados| C
     C -->|Respostas JSON| B
