@@ -22,6 +22,50 @@ Spring Boot, por sua vez, é uma extensão do Spring Framework que simplifica ai
 
 A relação entre Spring e Spring Boot é que o Spring Boot é construído em cima do Spring Framework, aproveitando muitos de seus recursos e aprimorando a produtividade do desenvolvedor. O Spring Boot simplifica a configuração e a inicialização de aplicativos Spring, fornecendo padrões de configuração inteligentes e um modelo de programação "convenção sobre configuração". Com o Spring Boot, os desenvolvedores podem criar aplicativos Java de forma mais rápida e eficiente, aproveitando os recursos poderosos do Spring Framework.
 
+## Componentes e Fluxo
+
+O projeto segue uma arquitetura baseada em repositórios, que é uma abordagem comum para organizar o código de forma a separar as preocupações e facilitar a manutenção. Abaixo estão os principais componentes e o fluxo de dados:
+
+![Fluxo de Dados](git_images/fluxo-de-dados.jpg)
+
+#### 1. Business Logic (Lógica de Negócio)
+
+- Interage diretamente com o Repository.
+
+- Envia e recebe Business Entities (entidades de domínio) para persistência e consultas.
+
+#### 2. Repository
+
+- Atua como fachada entre a lógica de negócio e o acesso à base de dados.
+
+- Recebe queries de persistência e devolve entidades.
+
+- Delegações internas:
+
+**Data Mapper**: transforma as entidades do domínio para o formato do banco de dados e vice-versa.
+
+**Query Object**: encapsula consultas complexas para buscar dados no Data Source.
+
+#### 4. Data Mapper
+
+Responsável por mapear os dados entre as entidades de negócio e os dados persistidos no Data Source.
+
+#### 5. Query Object
+
+Contém lógica de consulta específica, reutilizável e separada do repositório principal.
+
+#### 6. Data Source (Fonte de Dados)
+
+Representa o banco de dados ou qualquer outro mecanismo de armazenamento persistente.
+
+### **Fluxo de Dados**
+
+O fluxo de dados segue então dois conceitos:
+
+1. A lógica de negócio não se preocupa com como os dados são armazenados ou recuperados.
+
+2. O repositório orquestra os mapeamentos e consultas, mantendo a lógica de persistência isolada e reutilizável.
+
 ## **Passo 1: Criando o Projeto**
 
 ### **No [start.spring.io](https://start.spring.io/), selecione:**
@@ -34,7 +78,7 @@ A relação entre Spring e Spring Boot é que o Spring Boot é construído em ci
 
 👉 **Importe o projeto no IntelliJ IDEA** (ou sua IDE favorita).
 
-![image.png](image.png)
+![Fluxo de Dados](git_images/start.spring.png)
 
 **Estrutura do Projeto que iremos criar. Se quiserem, já podemos criar os arquivos que não existirem.** 
 
