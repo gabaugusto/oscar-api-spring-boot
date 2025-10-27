@@ -2,6 +2,7 @@ package br.com.oscar.api.repositories;
 
 import br.com.oscar.api.models.IndicadosAoOscar;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -28,4 +29,6 @@ public interface IndicadosAoOscarRepository extends JpaRepository<IndicadosAoOsc
 
     List<IndicadosAoOscar> findIndicadoByanoFilmagem(int id);
 
+    @Query(value = "SELECT * FROM indicados_ao_oscar WHERE nome_indicado LIKE %:name%", nativeQuery = true)
+    List<IndicadosAoOscar> findByExemplo(String name);
 }

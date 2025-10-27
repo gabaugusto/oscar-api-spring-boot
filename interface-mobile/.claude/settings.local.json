@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(java:*)",
+      "Bash(where java)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

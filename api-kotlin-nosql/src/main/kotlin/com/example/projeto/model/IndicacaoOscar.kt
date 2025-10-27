@@ -32,5 +32,5 @@ data class IndicacaoOscar(
     val nomeDoFilme: String,
 
     @Field("vencedor")
-    val vencedor: Boolean
+    val vencedor: Boolean,
 )
