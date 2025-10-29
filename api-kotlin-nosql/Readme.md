@@ -118,19 +118,6 @@ A estrutura abaixo segue o princípio da separação de responsabilidades, onde 
 3. **Repositories**:
    As classes chamadas de "repositories" são responsáveis pela persistência dos dados. Elas são usadas para interagir com o banco de dados ou qualquer outro mecanismo de armazenamento de dados. Os repositories fornecem métodos para criar, recuperar, atualizar e excluir dados no banco de dados. Eles encapsulam a lógica de acesso aos dados e oferecem uma camada de abstração para as operações de leitura e gravação. Os repositories são tipicamente implementados usando frameworks ORM (Object-Relational Mapping), como o Spring Data JPA, que simplificam a interação com o banco de dados.
 
-A estrutura do seu projeto deve ser similar a essa:
-
-**Diagrama de Funcionamento**
-
-```mermaid
-flowchart LR
-    Cliente -->|GET /api/indicacoes| Controller
-    Controller -->|repository.findAll()| Repository
-    Repository -->|Busca no banco| MongoDB
-    MongoDB -->|Retorna dados| Repository
-    Repository -->|Retorna lista| Controller
-    Controller -->|JSON| Cliente
-```
 
 🔹 **Explicação:**
 
@@ -234,3 +221,8 @@ class OscarController(private val repository: IndicacaoOscarRepository) {
 - **`@GetMapping`** → Define o método HTTP (GET, POST, etc.).
 - **`@PathVariable`** → Pega o valor da URL.
 - **`@RequestBody`** → Pega o corpo da requisição.
+
+## Conclusão
+
+Com poucos arquivos e uma estrutura bem organizada, é possível criar uma API completa em Kotlin usando Spring Boot, Gradle e MongoDB.
+Essa combinação oferece produtividade, tipagem forte, integração fluida com o banco de dados e um ecossistema robusto para projetos educacionais e profissionais.
