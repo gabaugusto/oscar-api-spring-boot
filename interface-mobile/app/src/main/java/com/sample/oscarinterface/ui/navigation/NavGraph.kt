@@ -18,6 +18,7 @@ import com.sample.oscarinterface.ui.screens.AtualizarScreen
 import com.sample.oscarinterface.ui.screens.HomeScreen
 import com.sample.oscarinterface.ui.screens.InserirScreen
 import com.sample.oscarinterface.ui.screens.ListaIndicacoesScreen
+import com.sample.oscarinterface.ui.screens.SearchScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -45,11 +46,12 @@ fun NavGraph() {
             startDestination = "home",
             modifier = Modifier.padding(paddingValues)
         ) {
-            composable("home") { HomeScreen() }
+            composable("home") { HomeScreen(navController = navController) }
             composable("listar") { ListaIndicacoesScreen() }
             composable("inserir") { InserirScreen() }
             composable("apagar") { ApagarScreen() }
             composable("atualizar") { AtualizarScreen() }
+            composable("buscar") { SearchScreen() }
         }
     }
 }

@@ -27,9 +27,14 @@ class OscarController(
 
     @GetMapping("/{id}")
     fun getIndicacaoById(@PathVariable id: String): ResponseEntity<IndicacaoOscar> {
-        return indicacaoOscarRepository.findById(id)
-            .map { indicacao -> ResponseEntity.ok(indicacao) }
-            .orElseGet { ResponseEntity.notFound().build() }
+        return try {
+            val objectId = org.bson.types.ObjectId(id)
+            indicacaoOscarRepository.findById(objectId)
+                .map { indicacao -> ResponseEntity.ok(indicacao) }
+                .orElseGet { ResponseEntity.notFound().build() }
+        } catch (e: IllegalArgumentException) {
+            ResponseEntity.notFound().build()
+        }
     }
     // Exemplo de endpoint para pegar por ID
     // api/indicacoes/{id}
@@ -89,10 +94,11 @@ class OscarController(
         @PathVariable idRegistro: Int,
         @RequestBody indicacaoAtualizada: IndicacaoOscar
     ): ResponseEntity<IndicacaoOscar> {
-        val indicacaoExistente = indicacaoOscarRepository.findByIdRegistro(idRegistro)
+        val indicacoesExistentes = indicacaoOscarRepository.findByIdRegistro(idRegistro)
 
-        return if (indicacaoExistente != null) {
-            val updatedIndicacao = IndicacaoOscar(
+        return if (indicacoesExistentes.isNotEmpty()) {
+            val indicacaoExistente = indicacoesExistentes.first()
+            val updatedIndicacao = indicacaoExistente.copy(
                 idRegistro = indicacaoAtualizada.idRegistro,
                 anoFilmagem = indicacaoAtualizada.anoFilmagem,
                 anoCerimonia = indicacaoAtualizada.anoCerimonia,
@@ -120,29 +126,29 @@ class OscarController(
 
     @PatchMapping("/{idRegistro}/vencedor")
     fun updateVencedor(
-        @PathVariable idRegistro: Int,  // Mantendo consistência com o nome na URL
+        @PathVariable idRegistro: Int,
         @RequestParam vencedor: Boolean
-    ) {
-        return indicacaoOscarRepository.findByIdRegistro(idRegistro)
-            .let { optionalIndicacao ->
-                optionalIndicacao.map { indicacao ->
-                    indicacao.copy(vencedor = vencedor).let { updated ->
-                        ResponseEntity.ok(indicacaoOscarRepository.save(updated))
-                    }
-                }
-            }
+    ): ResponseEntity<IndicacaoOscar> {
+        val indicacoes = indicacaoOscarRepository.findByIdRegistro(idRegistro)
+        return if (indicacoes.isNotEmpty()) {
+            val indicacao = indicacoes.first()
+            val updated = indicacao.copy(vencedor = vencedor)
+            ResponseEntity.ok(indicacaoOscarRepository.save(updated))
+        } else {
+            ResponseEntity.notFound().build()
+        }
     }
     // Exemplo de endpoint para corrigir
     // api/indicacoes/{id}/vencedor?vencedor=true
 
     @DeleteMapping("registro/{idRegistro}")
     fun deleteIndicacao(@PathVariable idRegistro: Int): ResponseEntity<Void> {
-        return when (val indicacoes = indicacaoOscarRepository.findByIdRegistro(idRegistro)) {
-            null, emptyList<IndicacaoOscar>() -> ResponseEntity.notFound().build()
-            else -> {
-                indicacoes.forEach { indicacaoOscarRepository.delete(it) }
-                ResponseEntity.noContent().build()
-            }
+        val indicacoes = indicacaoOscarRepository.findByIdRegistro(idRegistro)
+        return if (indicacoes.isEmpty()) {
+            ResponseEntity.notFound().build()
+        } else {
+            indicacoes.forEach { indicacaoOscarRepository.delete(it) }
+            ResponseEntity.noContent().build()
         }
     }
     // Exemplo de endpoint para apagar

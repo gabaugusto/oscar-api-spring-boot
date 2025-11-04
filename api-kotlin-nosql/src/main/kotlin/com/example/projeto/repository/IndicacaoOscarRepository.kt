@@ -1,13 +1,14 @@
 package com.example.projeto.repository
 
 import com.example.projeto.model.IndicacaoOscar
+import org.bson.types.ObjectId
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.mongodb.repository.MongoRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface IndicacaoOscarRepository : MongoRepository<IndicacaoOscar, String> {
+interface IndicacaoOscarRepository : MongoRepository<IndicacaoOscar, ObjectId> {
 
     fun findByAnoCerimonia(ano: Int): List<IndicacaoOscar>
 
