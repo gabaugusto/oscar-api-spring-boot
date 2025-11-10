@@ -8,9 +8,11 @@ import org.springframework.data.domain.Sort
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
+// Configuração para permitir requisições CORS do frontend rodando em localhost:3000
+// Previne problemas de política de mesma origem durante o desenvolvimento
 @CrossOrigin(origins = ["*"])
-@RestController
-@RequestMapping("/api/indicacoes")
+@RestController // Indica que esta classe é uma controladora REST
+@RequestMapping("/api/indicacoes") // Mapeia todas as rotas desta controladora para começarem com /api/indicacoes
 class OscarController(
     private val indicacaoOscarRepository: IndicacaoOscarRepository
 ) {
